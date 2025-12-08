@@ -1,0 +1,122 @@
+[
+  {
+    "serviceId": 3,
+    "serviceName": "Indoor Exercise & Play Sessions",
+    "providerName": "PlayPaws Indoor Park",
+    "providerEmail": "play@playpaws.com",
+    "price": 15,
+    "rating": 4.6,
+    "slotsAvailable": 6,
+    "description": "Supervised indoor play or one-on-one active sessions in heated facilities for pets unable to go outside during cold weather. Activities include interactive games, agility exercises, and mental stimulation to keep pets active and happy indoors.",
+    "image": "https://outwardhound.com/furtropolis/wp-content/uploads/2020/01/oh-indoor-agility-1100X800-1024x745.jpg",
+    "category": "Exercise & Play"
+  },
+  {
+    "serviceId": 5,
+    "serviceName": "Paw & Coat Sanitizing Walks",
+    "providerName": "CleanPaws Mobile",
+    "providerEmail": "mobile@cleanpaws.com",
+    "price": 25,
+    "rating": 4.5,
+    "slotsAvailable": 4,
+    "description": "Clean and dry pets' paws, belly, and coat after outdoor walks to remove ice melt, salt, and snow buildup. Helps prevent skin irritation, paw pad damage, and ingestion of harmful chemicals, keeping your pet clean and safe after winter adventures.",
+    "image": "https://pawleaks.com/wp-content/uploads/2020/07/washing-dog-paws-1.png",
+    "category": "Health & Safety"
+  },
+  {
+    "serviceId": 6,
+    "serviceName": "Winter Wellness Checks",
+    "providerName": "HealthyPaws Vet",
+    "providerEmail": "vet@healthypaws.com",
+    "price": 30,
+    "rating": 4.9,
+    "slotsAvailable": 3,
+    "description": "Basic health monitoring for hydration, skin condition, and mobility, especially for senior or vulnerable pets. Helps identify early signs of cold-related issues, such as arthritis flare-ups or dry skin, ensuring timely care and comfort.",
+    "image": "https://www.paradisepointanimalhospital.com/wp-content/uploads/2023/11/Pet-Wellness-Tips-for-Winter-Blitz2.jpg",
+    "category": "Health & Safety"
+  },
+  {
+    "serviceId": 4,
+    "serviceName": "Heated Pet Boarding or Daycare",
+    "providerName": "WarmWhiskers Boarding",
+    "providerEmail": "boarding@warmwhiskers.com",
+    "price": 35,
+    "rating": 4.9,
+    "slotsAvailable": 2,
+    "description": "Climate-controlled boarding with cozy bedding and wellness checks, ideal for holiday travelers and cold-sensitive pets. Ensures your pet stays warm, comfortable, and monitored for any signs of stress or health issues while you're away.",
+    "image": "https://www.lovingcareanimalhospital.net/wp-content/uploads/2025/11/Winter-Care-Advice-for-Dogs-and-Cats.jpg",
+    "category": "Boarding"
+  },
+  {
+    "serviceId": 7,
+    "serviceName": "Pet Sweaters & Clothing Fittings",
+    "providerName": "SnugFit Pet Boutique",
+    "providerEmail": "boutique@snugfit.com",
+    "price": 45,
+    "rating": 4.7,
+    "slotsAvailable": 4,
+    "description": "Insulated, waterproof pet clothing with personalized sizing and style consultations for comfort and warmth. Ensures your pet's clothing fits comfortably and provides optimal warmth without restricting movement, with a variety of materials and designs to choose from.",
+    "image": "https://m.media-amazon.com/images/I/61XDWm4yX1L.jpg",
+    "category": "Clothing"
+  },
+  {
+    "serviceId": 1,
+    "serviceName": "Paw Protection Treatments",
+    "providerName": "SafePaws Clinic",
+    "providerEmail": "contact@safepaws.com",
+    "price": 20,
+    "rating": 4.7,
+    "slotsAvailable": 5,
+    "description": "Application of protective balms or wax to shield pets' paws from ice, salt, and cracking. Includes post-walk cleaning to remove debris and chemicals, ensuring your pet's paws stay healthy and safe during winter walks.",
+    "image": "https://cbddoghealth.com/wp-content/uploads/2023/11/winter-dog-paw-protection.jpg",
+    "category": "Health & Safety"
+  },
+  {
+    "serviceId": 8,
+    "serviceName": "Emergency Pet Transport in Snow",
+    "providerName": "SnowSafe Pet Transport",
+    "providerEmail": "transport@snowsafe.com",
+    "price": 50,
+    "rating": 4.8,
+    "slotsAvailable": 2,
+    "description": "Safe, heated transport for vet visits or evacuations during winter storms, especially for elderly or disabled pets. Ensures your pet reaches their destination safely, even in hazardous weather conditions.",
+    "image": "https://petmedicaltransport.com/wp-content/uploads/2022/04/pet_stretcher-575x1024.jpg",
+    "category": "Transport"
+  },
+  {
+    "serviceId": 9,
+    "serviceName": "Pet-Friendly Snow Removal",
+    "providerName": "GreenPath Snow Services",
+    "providerEmail": "snow@greenpath.com",
+    "price": 20,
+    "rating": 4.6,
+    "slotsAvailable": 5,
+    "description": "Clear walkways and yards using pet-safe de-icers and create designated potty paths for safe pet access. Minimizes the risk of slips, falls, or exposure to harmful chemicals, making outdoor time safer for your pet.",
+    "image": "https://i5.walmartimages.com/seo/Pet-Safe-Ice-Melt-Eco-Friendly-Snow-Melter-for-Driveways-Sidewalks-Pet-Areas-Fast-Acting-Ice-Melter_d3de5cfe-cb69-4878-8da9-19f4e6f8a9ac.c665b5f7d396506f7bec18135371f35a.jpeg",
+    "category": "Outdoor Services"
+  },
+  {
+    "serviceId": 2,
+    "serviceName": "Winter Grooming & De-Matting",
+    "providerName": "FurryFriends Grooming",
+    "providerEmail": "grooming@furryfriends.com",
+    "price": 40,
+    "rating": 4.8,
+    "slotsAvailable": 3,
+    "description": "Specialized grooming for thick winter coats, focusing on detangling, de-matting, and skin hydration to prevent dryness and irritation. Uses premium hydrating products to keep your pet's coat and skin in top condition during the cold months.",
+    "image": "https://cdn.shopify.com/s/files/1/0681/6618/9353/files/Summer_vs._Winter_Pet_Grooming__Key_Differences_Explained_3.png",
+    "category": "Grooming"
+  },
+  {
+    "serviceId": 10,
+    "serviceName": "Winter Pet Nutrition Consultations",
+    "providerName": "NutriPaws Dietitians",
+    "providerEmail": "diet@nutripaws.com",
+    "price": 25,
+    "rating": 4.7,
+    "slotsAvailable": 3,
+    "description": "Tailored diet plans for pets needing extra calories to stay warm in cold weather or those becoming less active indoors. Focuses on balanced nutrition to support immune health, energy levels, and weight management during the winter months.",
+    "image": "https://earthwisepet.com/wp-content/uploads/2024/11/As-EarthWise-1024x800.png",
+    "category": "Nutrition"
+  }
+]

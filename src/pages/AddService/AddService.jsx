@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext/AuthContext';
+import axios from 'axios';
 
 const AddService = () => {
     const { user } = useContext(AuthContext);
@@ -10,7 +11,7 @@ const AddService = () => {
 
         const name = form.productName.value;
         const category = form.category.value;
-        const price = form.price.value;
+        const price = parseInt(form.price.value);
         const location = form.location.value;
         const description = form.description.value;
         const imageUrl = form.imageUrl.value;
@@ -28,6 +29,10 @@ const AddService = () => {
             email,
         }
         console.log(formData);
+        axios.post('http://localhost:3000/services', formData)
+        .then(res=> {
+            console.log(res);
+        })
 
     }
 

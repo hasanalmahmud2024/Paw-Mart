@@ -1,12 +1,30 @@
-import React from 'react';
+import React, { use, useEffect, useState } from 'react';
 import Slider from '../../components/Slider/Slider';
-import { Link, useLoaderData } from 'react-router';
+import { Link } from 'react-router';
 import ServiceCard from '../../components/ServiceCard/ServiceCard';
 import ExpertVets from '../../components/ExpertVets/ExpertVets'
 import WinterCareTips from '../../components/WinterTips/WinterTips';
+import axios from 'axios';
+import { AuthContext } from '../../context/AuthContext/AuthContext';
 
 const Home = () => {
-    const services = useLoaderData();
+    const [services, setServices] = useState();
+    const { setLoading } = use(AuthContext);
+
+
+    useEffect(() => {
+        axios.get('http://localhost:3000/services')
+            .then(response => {
+                // console.log(response);
+                setServices(response.data);
+                setLoading(false);
+            })
+            .catch(error => {
+                console.error('Error fetching services:', error);
+            });
+    }, []);
+
+    // console.log(services)
 
 
     return (
@@ -17,11 +35,11 @@ const Home = () => {
             </div>
             <h2 className="text-5xl font-bold text-center mb-4">Popular Winter Care Services</h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:w-[90vw] mx-auto mb-10">
-                {/* {
-                    services.slice(0, 6).map(service => (
-                        <ServiceCard key={service.serviceId} service={service} />
+                {
+                    services?.slice(0, 6).map(service => (
+                        <ServiceCard key={service._id} service={service} />
                     ))
-                } */}
+                }
             </div>
             <Link to={'/services'} className='flex justify-center mb-28'>
                 <button className="btn btn-primary btn-wide btn-xl">

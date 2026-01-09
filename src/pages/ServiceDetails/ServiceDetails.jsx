@@ -25,7 +25,7 @@ const ServiceDetails = () => {
             });
     }, [id, setLoading]);
 
-    console.log(service)
+    // console.log(service)
 
     return (
         <div>

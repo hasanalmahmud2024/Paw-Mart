@@ -3,7 +3,7 @@ import { Link } from "react-router";
 import { FaStar } from "react-icons/fa";
 
 const ServiceCard = ({ service }) => {
-    const { _id, name, price, imageUrl, date, } = service;
+    const { _id, name, price, imageUrl, category, location } = service;
 
     // console.log(service);
     
@@ -21,9 +21,10 @@ const ServiceCard = ({ service }) => {
                 <h2 className="card-title text-xl font-semibold">
                     {name}
                 </h2>
-                <div className="card-actions justify-end mt-2 pr-1">
+                <div className="badge badge-outline badge-warning">{category}</div>
+                <div className="card-actions justify-end pr-1">
                     <p className="text-primary font-semibold flex items-center gap-1">
-                        Date: {date}
+                       {location}
                     </p>
                     <p className="text-right font-bold text-gray-500">${price}</p>
                 </div>

@@ -42,9 +42,11 @@ const MyServices = () => {
     };
 
     return (
-        <div className='min-h-[50vh] py-5'>
+        <div className='min-h-[50vh] py-5 mb-5'>
+            <h2 className="text-4xl font-bold my-6 ml-6">My Services</h2>
+
             <div className="overflow-x-auto">
-                <table className="table mx-2 text-center">
+                <table className="table pl-2 text-center">
                     {/* head */}
                     <thead className=''>
                         <tr>

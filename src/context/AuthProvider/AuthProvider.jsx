@@ -5,9 +5,8 @@ import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged,
 
 const AuthProvider = ({children}) => {
     const [user, setUser] = useState(null);
-    const [loading, setLoading] = useState(true
-
-    )
+    const [loading, setLoading] = useState(true);
+    
     const googleProvider = new GoogleAuthProvider();
 
     const createUser = (email, password) => {

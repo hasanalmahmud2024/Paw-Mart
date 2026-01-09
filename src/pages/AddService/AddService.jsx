@@ -28,11 +28,12 @@ const AddService = () => {
             date,
             email,
         }
-        console.log(formData);
+        // console.log(formData)
         axios.post('http://localhost:3000/services', formData)
-        .then(res=> {
-            console.log(res);
-        })
+            .then(res=> {
+                console.log(res);
+            })
+            .catch(err => console.log(err))
 
     }
 
@@ -51,8 +52,6 @@ const AddService = () => {
                         <input
                             type="text"
                             name="productName"
-                            // value={formData.productName}
-                            // onChange={handleInputChange}
                             required
                             className="w-full px-4 py-2 border border-gray-700 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-600"
                             placeholder="Enter product or pet name"
@@ -67,8 +66,6 @@ const AddService = () => {
                         </label>
                         <select
                             name="category"
-                            // value={formData.category}
-                            // onChange={handleInputChange}
                             required
                             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:border-transparent text-gray-600"
                         >
@@ -89,19 +86,10 @@ const AddService = () => {
                         <input
                             type="number"
                             name="price"
-                            // value={formData.price}
-                            // onChange={handleInputChange}
-                            // disabled={formData.category === 'Pets'}
                             min="0"
                             step="0.01"
-                            className={`w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-600`
-                                // ${formData.category === 'Pets' ? 'bg-gray-100 cursor-not-allowed': 'bg-white'}
-                            }
-                        // placeholder={formData.category === 'Pets' ? 'Not applicable for pets' : 'Enter price'}
+                            className={`w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-600`}
                         />
-                        {/* {formData.category === 'Pets' && (
-                            <p className="mt-1 text-sm text-blue-600">Price is not applicable for pets and has been set to $0.</p>
-                        )} */}
                     </div>
 
 
@@ -113,8 +101,6 @@ const AddService = () => {
                         <input
                             type="text"
                             name="location"
-                            // value={formData.location}
-                            // onChange={handleInputChange}
                             required
                             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-600"
                             placeholder="Enter location"
@@ -129,8 +115,6 @@ const AddService = () => {
                         </label>
                         <textarea
                             name="description"
-                            // value={formData.description}
-                            // onChange={handleInputChange}
                             rows="4"
                             required
                             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-600"
@@ -147,8 +131,6 @@ const AddService = () => {
                         <input
                             type="url"
                             name="imageUrl"
-                            // value={formData.imageUrl}
-                            // onChange={handleInputChange}
                             required
                             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-600"
                             placeholder="https://example.com/image.jpg"
@@ -156,7 +138,7 @@ const AddService = () => {
                     </div>
 
 
-                    {/* Pick Up Date */}
+                    {/* Date */}
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">
                             Pick Up Date
@@ -164,8 +146,6 @@ const AddService = () => {
                         <input
                             type="date"
                             name="date"
-                            // value={formData.date}
-                            // onChange={handleInputChange}
                             required
                             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-600"
                             onFocus={(e) => e.target.showPicker()}
@@ -192,7 +172,6 @@ const AddService = () => {
                     <div>
                         <button
                             type="submit"
-                            // disabled={!formData.productName || !formData.category || !formData.location || !formData.description || !formData.imageUrl || !formData.date}
                             className="w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-medium"
                         >
                             Submit

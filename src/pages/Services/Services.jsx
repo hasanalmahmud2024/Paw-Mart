@@ -16,8 +16,9 @@ const Services = () => {
             })
             .catch(error => {
                 console.error('Error fetching services:', error);
+                setLoading(false)
             });
-    }, []);
+    }, [setLoading]);
 
     return (
         <div className='mt-10 mb-5 min-h-screen'>
@@ -26,7 +27,7 @@ const Services = () => {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:w-[90vw] mx-auto mb-10">
                 {
                     services?.map(service => (
-                        <ServiceCard key={service.serviceId} service={service} />
+                        <ServiceCard key={service?._id} service={service} />
                     ))
                 }
             </div>

@@ -21,8 +21,9 @@ const Home = () => {
             })
             .catch(error => {
                 console.error('Error fetching services:', error);
+                setLoading(false);
             });
-    }, []);
+    }, [setLoading]);
 
     // console.log(services)
 

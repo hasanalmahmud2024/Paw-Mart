@@ -21,8 +21,9 @@ const ServiceDetails = () => {
             })
             .catch(error => {
                 console.error('Error fetching services:', error);
+                setLoading(false);
             });
-    }, [id]);
+    }, [id, setLoading]);
 
     console.log(service)
 

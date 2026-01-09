@@ -20,15 +20,14 @@ const MyServices = () => {
             });
     }, [user?.email]);
 
-    console.log(myServices);
+    // console.log(myServices);
 
     const handleDelete = id => {
-        axios.delete(`http://localhost:3000/update/${id}`)
+        axios.delete(`http://localhost:3000/delete/${id}`)
             .then(res => {
-                console.log(res.data);
-
+                // console.log(res.data);
                 const filterData = myServices.filter(service => service?._id != id);
-                setMyServices(filterData)
+                setMyServices(filterData);
             })
             .catch(err => console.log(err))
     }

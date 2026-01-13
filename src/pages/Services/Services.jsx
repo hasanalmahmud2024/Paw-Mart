@@ -2,6 +2,7 @@ import React, { use, useEffect, useState } from 'react';
 import ServiceCard from '../../components/ServiceCard/ServiceCard';
 import axios from 'axios';
 import { AuthContext } from '../../context/AuthContext/AuthContext';
+import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 
 const Services = () => {
     const [services, setServices] = useState([]);
@@ -20,6 +21,8 @@ const Services = () => {
                 setLoading(false)
             });
     }, [category, setLoading]);
+
+    
 
     return (
         <div className='mt-10 mb-5 min-h-screen'>

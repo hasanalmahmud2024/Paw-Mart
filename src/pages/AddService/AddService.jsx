@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext/AuthContext';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 const AddService = () => {
     const { user } = useContext(AuthContext);
@@ -32,14 +33,30 @@ const AddService = () => {
         axios.post('http://localhost:3000/services', formData)
             .then(res=> {
                 console.log(res);
+                if (res.data.acknowledged) {
+                    Swal.fire({
+                        title: "Added Successfully!",
+                        icon: "success",
+                        draggable: true
+                    });
+                    form.reset()
+                }
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                console.log(err)
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Something went wrong!",
+                });
+            })
 
     }
 
 
     return (
         <div className='my-10 mx-4'>
+            <title>PAWMART | Add Service</title>
             <div className="container max-w-2xl mx-auto p-6 bg-white shadow-lg rounded-lg">
                 <h2 className="text-2xl font-bold mb-6 text-gray-800">Pet/Product Submission</h2>
                 <form onSubmit={handleSubmit} className="space-y-6">

@@ -47,7 +47,7 @@ const Footer = () => {
                 </div>
             </nav>
             <aside>
-                <p className='flex gap-1'>Copyright © {new Date().getFullYear()} - All right reserved by- <span className=' text-blue-50 font-bold font-mono'> WARM PAWS</span><img src="/golden-retriever.png" className="w-4 h-4" alt="warm paws icon" /></p>
+                <p className='flex gap-1'>Copyright © {new Date().getFullYear()} - All right reserved by- <span className=' text-blue-50 font-bold font-mono'> PAWMART </span><img src="/golden-retriever.png" className="w-4 h-4" alt="warm paws icon" /></p>
             </aside>
         </footer>
     );

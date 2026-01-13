@@ -74,7 +74,7 @@ const Register = () => {
 
     return (
         <div className="hero bg-base-200 py-10">
-            <title>WARM PAWS | Sign Up</title>
+            <title>PAWMART | Sign Up</title>
             <div className="hero-content flex-col ">
                 <div className="text-center lg:text-left mb-2">
                     <h1 className="text-5xl font-bold">Register Your Account!</h1>

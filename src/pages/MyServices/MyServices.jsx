@@ -2,6 +2,7 @@ import React, { use, useEffect, useState } from 'react';
 import { AuthContext } from '../../context/AuthContext/AuthContext';
 import axios from 'axios';
 import UpdateModal from '../../components/UpdateModal/UpdateModal';
+import Swal from 'sweetalert2';
 
 const MyServices = () => {
     const [selectedService, setSelectedService] = useState(null);
@@ -18,18 +19,40 @@ const MyServices = () => {
             .catch(error => {
                 console.error('Error fetching services:', error);
             });
-    }, [user?.email]);
+    }, [setLoading, user?.email]);
 
     // console.log(myServices);
 
     const handleDelete = id => {
-        axios.delete(`http://localhost:3000/delete/${id}`)
-            .then(res => {
-                // console.log(res.data);
-                const filterData = myServices.filter(service => service?._id != id);
-                setMyServices(filterData);
-            })
-            .catch(err => console.log(err))
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios.delete(`http://localhost:3000/delete/${id}`)
+                    .then(res => {
+                        console.log(res.data);
+                        if (res.data.deletedCount) {
+                            const filterData = myServices.filter(service => service?._id != id);
+                            setMyServices(filterData);
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your file has been deleted.",
+                                icon: "success"
+                            });
+                        }
+                    })
+                    .catch(err => console.log(err))
+               
+            }
+        });
+
+        
     }
 
     const handleUpdate = updatedService => {
@@ -43,6 +66,7 @@ const MyServices = () => {
 
     return (
         <div className='min-h-[50vh] py-5 mb-5'>
+            <title>PAWMART | My Services</title>
             <h2 className="text-4xl font-bold my-6 ml-6">My Services</h2>
 
             <div className="overflow-x-auto">

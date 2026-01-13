@@ -11,6 +11,7 @@ import PrivateRoute from "./PrivateRoute";
 import ResetPassword from "../pages/ResetPassword/ResetPassword";
 import AddService from "../pages/AddService/AddService";
 import MyServices from "../pages/MyServices/MyServices";
+import Orders from "../pages/Orders/Orders";
 
 
 const router = createBrowserRouter([
@@ -60,6 +61,12 @@ const router = createBrowserRouter([
                 path: '/my-services',
                 element: <PrivateRoute>
                     <MyServices></MyServices>
+                </PrivateRoute>,
+            },
+            {
+                path: '/my-orders',
+                element: <PrivateRoute>
+                    <Orders></Orders>
                 </PrivateRoute>,
             },
         ]

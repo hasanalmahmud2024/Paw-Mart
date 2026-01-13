@@ -29,6 +29,7 @@ const ResetPassword = () => {
 
     return (
         <div className='min-h-[60vh] grid justify-center items-center py-12 px-8'>
+            <title>PAWMART | Reset Password</title>
             <div className="max-w-md mx-auto p-10 shadow-lg bg-neutral-300 rounded-lg mb-8">
                 <h2 className="text-3xl font-black mb-10 text-center text-black">Reset Password</h2>
 

@@ -1,110 +1,91 @@
-🐕 Pet Adoption & Supply Portal — “PawMart”
+# 🐾 PawMart – Pet Adoption & Supply Portal
 
-PawMart is a community-driven platform where pet owners, breeders, and shops can list pets for adoption or sell pet-related products (food, toys, accessories, etc.). Buyers and adopters can browse, contact, and order directly — all inside a friendly and modern single-page application.
+PawMart is a community-driven web platform where pet owners, breeders, and pet shops can list pets for adoption or sell pet-related products such as food, accessories, and care items. Users can browse listings, place adoption or purchase orders, and manage their own listings and orders easily.
 
-🌍 Live Demo
+🌐 **Live Website:** https://pawmart-pet-n-supplies-ham004.netlify.app
+🛠 **Server API:** https://pawmart-backend-eight.vercel.app  
 
-Live URL: /
+---
 
-📌 Project Purpose
+## 🚀 Key Features
 
-The platform uses Firebase authentication, secure environment variables, JSON-based service data, modern UI animations, and SPA routing.
+- 🐶 **Pet Adoption & Product Marketplace**  
+  Browse pets for adoption and shop pet food, accessories, and care products in one place.
 
-✨ Key Features
+- 🔍 **Category-wise Filtering & Search**  
+  Filter listings by category and search by product or pet name.
 
-### Modern & Minimalist UI
+- 🔐 **Secure Authentication**  
+  Login and registration using Firebase Authentication (Email/Password & Google Login).
 
-- Fully responsive design (mobile → desktop)
-- Smooth SPA navigation without reload errors
+- 🧺 **Add & Manage Listings (Private)**  
+  Logged-in users can add, update, and delete their own listings.
 
-### Authentication System
+- 🛒 **Adopt / Order System**  
+  Users can place adoption requests or product orders through a secure order modal.
 
-- Firebase Email/Password Authentication
-- Google Social Login
-- Protected Routes (Service Details Page)
-- Password Validation (Uppercase, Lowercase, Min 6 chars)
-- Password Reset Page
-- Login Redirect to Intended Route
-- Update Profile (Name + Photo)
+- 🧾 **My Orders & PDF Report**  
+  View all personal orders and download them as a PDF report.
 
-### Service Data (JSON)
+- 🌗 **Dark / Light Mode Toggle**  
+  User-friendly theme switcher for better accessibility.
 
--
-- Displayed as cards on Home Page
-- Each card includes image, name, rating, price & details button
+- 📱 **Fully Responsive Design**  
+  Optimized for mobile, tablet, and desktop devices.
 
-### Pages
+---
 
-- Home (Hero slider, popular listings, winter tips, vets section, extra section)
-- Service Details (Protected)
-- Login
-- Signup
-- Forget Password
-- My Profile (Protected)
+## 🧩 Pages Overview
 
-### Forms & Toasts
+- **Home Page** – Banner slider, categories, recent listings, awareness sections  
+- **Pets & Supplies** – All listings with filters and search  
+- **Category Filter Page** – Listings filtered by selected category  
+- **Listing Details (Private)** – Full listing details with order option  
+- **Add Listing (Private)** – Add new pets or products  
+- **My Listings (Private)** – Manage user’s own listings  
+- **My Orders (Private)** – View orders and download PDF report  
+- **Authentication Pages** – Login & Register  
+- **404 Page** – Custom page not found  
 
-- Toast success/error messages (react-hot-toast)
-- Book Service form
-- Login/Signup form with password toggle eye icon
-- Forgot password email autofill
+---
 
-### Deployment
-
-- SPA-safe hosting (Netlify)
-- Firebase authorized domains added
-- Environment variables secured (.env.local)
-
-🛠️ Tech Stack
+## 🛠️ Tech Stack
 
 ### Frontend
-
-- React + Vite / React Router
-- Tailwind CSS / DaisyUI
-- Swiper.js for slider
-- AOS / Animate.css for animations
+- React
+- React Router
+- Tailwind CSS
+- Swiper.js (Banner Slider)
+- Axios
+- Firebase Authentication
+- jsPDF & jsPDF-AutoTable
+- react-hot-toast
+- sweet-alert2
 
 ### Backend
+- Node.js
+- Express.js
+- MongoDB
+- Vercel (Server Deployment)
 
-- Firebase Authentication
+---
 
-### Other Tools
+## 🔐 Authentication & Authorization
 
-- react-hot-toast
-- Environment variables
-- GitHub for version control
+- Firebase Authentication for client-side login/register
+- Protected routes for private pages
+- Logged-in users remain authenticated on page reload
+- Only listing owners can update or delete their listings
 
-### NPM Packages Used
+---
 
-- react-hot-toast
-- swiper
-- AOS / Animate.css / React-Spring
+## 📦 Database Collections
 
-📚 Main Features Breakdown
+### `listings`
+- Stores pet adoption and product listings
 
-### Navbar
+### `orders`
+- Stores adoption requests and purchase orders
 
-- Shows Home, Listings, My Profile
-- Shows Login/Register if logged out
-- Shows user avatar + logout if logged in
-- Display user's displayName on hover
+---
 
-### Home Page Sections
-
-- Winter hero slider (Swiper)
-- Popular Listings (JSON data)
-- Winter Care Tips
-- Meet Our Expert Vets
-
-### Protected Service Details Page
-
-- Only logged-in users can view
-- Redirect to login if not authenticated
-- After login, redirect back to requested page
-- Shows full service information
-- Book Service form (Name + Email)
-
-### My Profile
-
-- Shows user: Name, Email, Photo
-- Update Profile button → lets user edit Name & Photo

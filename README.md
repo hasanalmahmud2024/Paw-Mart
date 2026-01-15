@@ -1,5 +1,4 @@
-
- 🐕 Pet Adoption & Supply Portal — “PawMart” 
+🐕 Pet Adoption & Supply Portal — “PawMart”
 
 PawMart is a community-driven platform where pet owners, breeders, and shops can list pets for adoption or sell pet-related products (food, toys, accessories, etc.). Buyers and adopters can browse, contact, and order directly — all inside a friendly and modern single-page application.
 
@@ -8,7 +7,6 @@ PawMart is a community-driven platform where pet owners, breeders, and shops can
 Live URL: /
 
 📌 Project Purpose
-
 
 The platform uses Firebase authentication, secure environment variables, JSON-based service data, modern UI animations, and SPA routing.
 
@@ -31,13 +29,13 @@ The platform uses Firebase authentication, secure environment variables, JSON-ba
 
 ### Service Data (JSON)
 
-- 
+-
 - Displayed as cards on Home Page
 - Each card includes image, name, rating, price & details button
 
 ### Pages
 
-- Home (Hero slider, popular services, winter tips, vets section, extra section)
+- Home (Hero slider, popular listings, winter tips, vets section, extra section)
 - Service Details (Protected)
 - Login
 - Signup
@@ -86,15 +84,15 @@ The platform uses Firebase authentication, secure environment variables, JSON-ba
 
 ### Navbar
 
-- Shows Home, Services, My Profile
+- Shows Home, Listings, My Profile
 - Shows Login/Register if logged out
 - Shows user avatar + logout if logged in
-- Display user’s displayName on hover
+- Display user's displayName on hover
 
 ### Home Page Sections
 
 - Winter hero slider (Swiper)
-- Popular Services (JSON data)
+- Popular Listings (JSON data)
 - Winter Care Tips
 - Meet Our Expert Vets
 
@@ -110,4 +108,3 @@ The platform uses Firebase authentication, secure environment variables, JSON-ba
 
 - Shows user: Name, Email, Photo
 - Update Profile button → lets user edit Name & Photo
-

@@ -1,13 +1,16 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 const Footer = () => {
     return (
-        <footer className="footer footer-horizontal footer-center bg-base-200 text-base-content rounded py-16">
+        <footer className="footer footer-horizontal footer-center bg-black opacity-95 text-white  rounded py-16 px-4">
+            <Link to={'/'} className="btn btn-ghost text-xl font-mono"><img src="/golden-retriever.png" className="w-10" alt="warm paws icon" /> PawMart </Link>
+            <p>PawMart connects local pet owners and buyers for adoption and pet care products.</p>
             <nav className="grid grid-flow-col gap-4">
-                <a className="link link-hover">About us</a>
+                <Link to={'/'} className='link link-hover'>Home</Link>
+                <Link to={'/pets-supplies'} className='link link-hover'>Pets & Supplies</Link>
                 <a className="link link-hover">Contact</a>
-                <a className="link link-hover">Jobs</a>
-                <a className="link link-hover">Privacy Policy</a>
+                <a className="link link-hover">Terms & Conditions</a>
             </nav>
             <nav>
                 <div className="grid grid-flow-col gap-4">
@@ -47,7 +50,7 @@ const Footer = () => {
                 </div>
             </nav>
             <aside>
-                <p className='flex gap-1'>Copyright © {new Date().getFullYear()} - All right reserved by- <span className=' text-blue-50 font-bold font-mono'> PAWMART </span><img src="/golden-retriever.png" className="w-4 h-4" alt="warm paws icon" /></p>
+                <p className='flex gap-1'>Copyright © {new Date().getFullYear()} - All right reserved by- <span className=' font-bold font-mono'> PawMart </span></p>
             </aside>
         </footer>
     );

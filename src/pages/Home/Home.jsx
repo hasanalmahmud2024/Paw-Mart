@@ -1,55 +1,54 @@
-import React, { use, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Slider from '../../components/Slider/Slider';
 import { Link } from 'react-router';
-import ServiceCard from '../../components/ServiceCard/ServiceCard';
-import ExpertVets from '../../components/ExpertVets/ExpertVets'
-import WinterCareTips from '../../components/WinterTips/WinterTips';
 import axios from 'axios';
 import { AuthContext } from '../../context/AuthContext/AuthContext';
+import Categories from '../../components/Categories/Categories';
+import ListingCard from '../../components/ListingCard/ListingCard';
+import LoadingComponent from '../../components/LoadingComponent/LoadingComponent';
 
 const Home = () => {
-    const [services, setServices] = useState();
-    const { setLoading } = use(AuthContext);
+    const [listings, setListings] = useState();
+    const { loading, setLoading } = useContext(AuthContext);
 
 
     useEffect(() => {
-        axios.get('http://localhost:3000/services')
+        axios.get('https://pawmart-backend-eight.vercel.app/listings?limit=6')
             .then(response => {
                 // console.log(response);
-                setServices(response.data);
+                setListings(response.data);
                 setLoading(false);
             })
             .catch(error => {
-                console.error('Error fetching services:', error);
+                console.error('Error fetching listings:', error);
                 setLoading(false);
             });
     }, [setLoading]);
 
-    // console.log(services)
+    // console.log(listings)
+    
 
 
     return (
-        <div className=''>
-            <title>PAWMART | Home</title>
-            <div className='mt-5 mb-18'>
-                <Slider></Slider>
-            </div>
-            <h2 className="text-5xl font-bold text-center mb-4">Popular Winter Care Services</h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:w-[90vw] mx-auto mb-10">
-                {
-                    services?.slice(0, 6).map(service => (
-                        <ServiceCard key={service._id} service={service} />
+        <div className='max-w-7xl mx-auto'>
+            <title>PawMart | Home</title>
+            <Slider></Slider>
+            <Categories></Categories>
+
+            <h2 className="text-5xl font-bold text-center mb-5">Recent Listings</h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 px-6 my-10">
+                { 
+                    listings?.map(listing => (
+                        <ListingCard key={listing._id} listing={listing} />
                     ))
                 }
             </div>
-            <Link to={'/services'} className='flex justify-center mb-28'>
-                <button className="btn btn-primary btn-wide btn-xl">
-                    See All Services
+            <Link to={'/pets-supplies'} className='flex justify-center mt-32 mb-10'>
+                <button className="btn btn-wide btn-xl inline-block text-center bg-teal-500 hover:bg-teal-600 text-white py-2 rounded-lg transition transform hover:shadow-2xl hover:scale-105">
+                    All Pets & Supplies
                 </button>
             </Link>
 
-            <ExpertVets></ExpertVets>
-            <WinterCareTips></WinterCareTips>
 
         </div>
     );

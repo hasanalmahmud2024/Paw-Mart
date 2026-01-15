@@ -1,4 +1,4 @@
-import React, { use, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../context/AuthContext/AuthContext';
 import { IoMdEye, IoMdEyeOff } from 'react-icons/io';
 import { updateProfile } from 'firebase/auth';
@@ -7,7 +7,7 @@ import toast, { Toaster } from 'react-hot-toast';
 
 const Profile = () => {
     const [isFormOpen, setIsFormOpen] = useState(false);
-    const { user, setUser } = use(AuthContext);
+    const { user, setUser, signOutUser } = useContext(AuthContext);
 
     const handleOpenForm = () => {
         setIsFormOpen(!isFormOpen);
@@ -31,9 +31,21 @@ const Profile = () => {
         })
     }
 
+    const handleSignOut = () => {
+        signOutUser()
+            .then(() => {
+                toast.success("Signed Out")
+                console.log('Signed out');
+            })
+            .catch(error => {
+                console.log(error);
+                toast.error(error.message);
+            })
+    }
+
     return (
-        <div className="hero bg-base-200 min-h-screen ">
-            <title>PAWMART | My Profile</title>
+        <div className="hero bg-base-200 md:min-h-[85vh] min-h-screen">
+            <title>PawMart | My Profile</title>
             <div className="hero-content flex-col text-center ">
                 <div className="avatar">
                     <div className="w-36 rounded-full">
@@ -55,13 +67,16 @@ const Profile = () => {
                                 <label className="label">Your Photo </label>
                                 <input name='photoURL' defaultValue={user?.photoURL} type="text" className="input" placeholder="PhotoURL" />
 
-                                <button className="btn btn-primary mt-4">Update</button>
+                                <button className="btn inline-block text-center bg-teal-500 hover:bg-teal-600 text-white py-2 rounded-lg transition transform hover:shadow-2xl hover:scale-105 mt-4">Update</button>
                             </fieldset>
-                        </form>) : 
-                        <button onClick={handleOpenForm} className="btn btn-primary">Update Profile</button>
+                        </form>) :
+                        <div className='flex flex-col md:flex-row gap-3'>
+                            <button onClick={handleOpenForm} className="btn inline-block text-center bg-teal-600 hover:bg-teal-700 text-white py-2 rounded-lg transition transform hover:shadow-2xl hover:scale-105">Update Profile</button>
+                            <button onClick={handleSignOut} className="btn bg-orange-600 hover:bg-orange-700 text-white py-2 rounded-lg transition transform hover:shadow-2xl hover:scale-105">Logout</button>
+                        </div>
                 }
             </div>
-            <Toaster></Toaster>
+
         </div>
     );
 };

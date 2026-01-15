@@ -1,6 +1,6 @@
 import React from 'react';
 
-const LoadingSpinner = () => {
+const LoadingComponent = () => {
     return (
         <div className='flex flex-col justify-center items-center gap-5 min-h-[75vh]'>
             <span className="loading loading-spinner text-primary"></span>
@@ -9,4 +9,4 @@ const LoadingSpinner = () => {
     );
 };
 
-export default LoadingSpinner;
+export default LoadingComponent;

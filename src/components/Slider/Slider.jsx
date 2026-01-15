@@ -1,37 +1,77 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Pagination } from 'swiper/modules';
+import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
+import "swiper/css/navigation";
 
-const imageUrls = [
-    "https://images.unsplash.com/photo-1494256997604-768d1f608cac?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fHBldHxlbnwwfHwwfHx8Mg%3D%3D",
-    "https://images.unsplash.com/photo-1625321171045-1fea4ac688e9?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGRvZyUyMGNhcmV8ZW58MHwwfDB8fHwy",
-    "https://images.unsplash.com/photo-1611173622933-91942d394b04?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8ZG9nJTIwY2FyZXxlbnwwfDB8MHx8fDI%3D",
-    "https://images.unsplash.com/photo-1719752585472-ddc1cc7edbf6?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Y2F0JTIwY2FyZXxlbnwwfDB8MHx8fDI%3D",
-    "https://images.unsplash.com/photo-1597603413826-cd1c06b05222?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Z3Jvb21pbmd8ZW58MHx8MHx8fDA%3D",
-    "https://images.unsplash.com/photo-1625279138876-8910c2af9a30?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGdyb29taW5nfGVufDB8fDB8fHwy",
-    "https://images.unsplash.com/photo-1625279138836-e7311d5c863a?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Z3Jvb21pbmd8ZW58MHx8MHx8fDA%3D",
-    "https://images.unsplash.com/photo-1528846104175-4fd300ee59da?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjJ8fHBldCUyMGNhcmV8ZW58MHx8MHx8fDI%3D",
-    "https://images.unsplash.com/photo-1513360371669-4adf3dd7dff8?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Y2F0JTIwY2FyZXxlbnwwfDB8MHx8fDI%3D",
-    "https://images.unsplash.com/photo-1625321150203-cea4bee44b54?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "https://images.unsplash.com/photo-1759164955427-14ca448a839d?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NjJ8fHBldCUyMGNhcmV8ZW58MHx8MHx8fDI%3D",
-]
+
+const slides = [
+    {
+        title: "Find Your Furry Friend Today 🐶",
+        description:
+            "Discover pets for adoption and connect with trusted local pet owners near you.",
+        image:
+            "https://images.unsplash.com/photo-1494256997604-768d1f608cac?w=1200&auto=format&fit=crop&q=80",
+    },
+    {
+        title: "Adopt, Don't Shop ❤️",
+        description:
+            "Give a loving home to pets who need care, warmth, and compassion.",
+        image:
+            "https://imgs.search.brave.com/VEVgOp3ffmapTZ0JAXrVp9y2eRrNA-_Hm-HKNHQmR0E/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/cHJlbWl1bS1waG90/by9hc3NvcnRlZC1j/YXRzLWRvZ3Mtc3R1/ZGlvLXdoaXRlLWJh/Y2tncm91bmQtd2l0/aC1jb3B5LXNwYWNl/LXZlcnNhdGlsZS1k/ZXNpZ25zXzE3NDUz/My02NDYzOC5qcGc_/c2VtdD1haXNfaHli/cmlkJnc9NzQwJnE9/ODA",
+    },
+    {
+        title: "Everything Your Pet Needs 🐾",
+        description:
+            "Shop quality food, toys, accessories, and care products for happy pets.",
+        image:
+            "https://imgs.search.brave.com/QlLeLkR0n3m6pTsPyY6nLXQ8oNPJk9MneY0nb6fuOhU/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly90aHVt/YnMuZHJlYW1zdGlt/ZS5jb20vYi9wbGVu/dHktcGV0LXByb2R1/Y3RzLXdoaXRlLWJh/Y2tncm91bmQtdG9w/LXZpZXcta2liYmxl/cy1jYW5uZWQtZm9v/ZC1ib25lLXRveXMt/YnJ1c2gtbGVhc2gt/bnV0cml0aW9uLWNh/cmUteW91ci1jYXQt/MTQwNDY3OTcwLmpw/Zw",
+    },
+    {
+        title: "Happy Owners, Happy Pets 😄",
+        description:
+            "Join our community of loving pet owners and share unforgettable moments with your furry friends.",
+        image:
+            "https://images.unsplash.com/photo-1642112312529-7c870afa6382?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fHBldCUyMG93bmVyfGVufDB8MHwwfHx8Mg%3D%3D",
+    },
+];
 
 const Slider = () => {
     return (
-        <div className=''>
-            <Swiper modules={[Autoplay, Pagination]} autoplay pagination={{ clickable: true }} loop={true}>
-                {imageUrls.map((url, index) => (
+        <section className="w-full my-5">
+            <Swiper
+                modules={[Autoplay, Pagination, Navigation]}
+                autoplay={{ delay: 4000, disableOnInteraction: false }}
+                pagination={{ clickable: true }}
+                navigation={true}
+                loop={true}
+                style={{ height: "75vh" }}
+            >
+                {slides.map((slide, index) => (
                     <SwiperSlide key={index}>
-                        <img src={url}
-                            className="object-cover w-full h-64 lg:h-96"
-                            alt={`pet image ${index}`} />
+                        <div
+                            className="h-full bg-cover bg-center flex items-center"
+                            style={{ backgroundImage: `url('${slide.image}')` }}
+                        >
+                            <div className="bg-black/50 w-full h-full flex items-center">
+                                <div className="max-w-7xl mx-auto px-6 text-white">
+                                    <h1 className="text-4xl md:text-5xl font-bold mb-4">
+                                        {slide.title}
+                                    </h1>
+                                    <p className="max-w-xl text-lg mb-6">{slide.description}</p>
+                                    {/* <button
+                                        className={`${slide.buttonColor} px-6 py-3 transition rounded-lg font-semibold`}
+                                    >
+                                        {slide.buttonText}
+                                    </button> */}
+                                </div>
+                            </div>
+                        </div>
                     </SwiperSlide>
                 ))}
-
             </Swiper>
-        </div>
+        </section>
     );
 };
 

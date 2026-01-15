@@ -1,10 +1,12 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../context/AuthContext/AuthContext';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
-const AddService = () => {
+const AddListings = () => {
     const { user } = useContext(AuthContext);
+    const [category, setCategory] = useState('');
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -12,12 +14,44 @@ const AddService = () => {
 
         const name = form.productName.value;
         const category = form.category.value;
-        const price = parseInt(form.price.value);
+        const price = parseFloat(form.price.value);
         const location = form.location.value;
         const description = form.description.value;
         const imageUrl = form.imageUrl.value;
         const date = form.date.value;
         const email = form.email.value;
+
+        // Validate image URL
+        const isValidUrl = (url) => {
+            try {
+                new URL(url);
+                return true;
+            } catch (e) {
+                return false;
+            }
+        };
+
+        if (!isValidUrl(imageUrl)) {
+            Swal.fire({
+                icon: "error",
+                title: "Invalid Image URL",
+                text: "Please enter a valid URL for the image.",
+            });
+            return;
+        }
+
+        // Validate date
+        const selectedDate = new Date(date);
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        if (selectedDate < today) {
+            Swal.fire({
+                icon: "warning",
+                title: "Invalid Date",
+                text: "Pick-up date must be today or in the future.",
+            });
+            return;
+        }
 
         const formData = {
             name,
@@ -28,39 +62,44 @@ const AddService = () => {
             imageUrl,
             date,
             email,
-        }
-        // console.log(formData)
-        axios.post('http://localhost:3000/services', formData)
-            .then(res=> {
-                console.log(res);
+        };
+
+        axios.post('https://pawmart-backend-eight.vercel.app/listings', formData)
+            .then(res => {
                 if (res.data.acknowledged) {
                     Swal.fire({
-                        title: "Added Successfully!",
+                        title: "Listing Added Successfully!",
+                        html: `<p><strong>${name}</strong> has been added to <strong>${category}</strong>.</p>`,
                         icon: "success",
                         draggable: true
                     });
-                    form.reset()
+                    form.reset();
                 }
             })
             .catch(err => {
-                console.log(err)
+                console.log(err);
+
+                let errorMessage = "Something went wrong!";
+                if (err.response) {
+                    errorMessage = err.response.data.message || errorMessage;
+                } else if (err.request) {
+                    errorMessage = "No response from the server. Please try again.";
+                }
                 Swal.fire({
                     icon: "error",
                     title: "Oops...",
-                    text: "Something went wrong!",
+                    text: errorMessage,
                 });
-            })
-
-    }
-
+            });
+    };
 
     return (
         <div className='my-10 mx-4'>
-            <title>PAWMART | Add Service</title>
+            <title>PawMart | Add Listing</title>
             <div className="container max-w-2xl mx-auto p-6 bg-white shadow-lg rounded-lg">
-                <h2 className="text-2xl font-bold mb-6 text-gray-800">Pet/Product Submission</h2>
+                <h2 className="text-2xl font-bold text-gray-800">Add New Listing</h2>
+                <p className='text-gray-800 mb-6'>Share pets for adoption or sell pet-related products.</p>
                 <form onSubmit={handleSubmit} className="space-y-6">
-
                     {/* Product/Pet Name */}
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -75,7 +114,6 @@ const AddService = () => {
                         />
                     </div>
 
-
                     {/* Category Dropdown */}
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -85,30 +123,32 @@ const AddService = () => {
                             name="category"
                             required
                             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:border-transparent text-gray-600"
+                            onChange={(e) => setCategory(e.target.value)}
                         >
                             <option value="">Select a category</option>
-                            <option value="Pets">Pets</option>
+                            <option value="Pet">Pet</option>
                             <option value="Food">Food</option>
                             <option value="Accessories">Accessories</option>
                             <option value="Care Products">Care Products</option>
                         </select>
                     </div>
 
-
-                    {/* Price Field - Conditionally Disabled */}
+                    {/* Price */}
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">
-                            Price ($)
+                            Price (৳)
                         </label>
                         <input
                             type="number"
                             name="price"
                             min="0"
-                            step="0.01"
-                            className={`w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-600`}
+                            step="1"
+                            defaultValue={0}
+                            disabled={category === "Pet"}
+                            className={`w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-600 ${category === "Pet" ? "bg-gray-100 cursor-not-allowed" : ""
+                                }`}
                         />
                     </div>
-
 
                     {/* Location */}
                     <div>
@@ -124,7 +164,6 @@ const AddService = () => {
                         />
                     </div>
 
-
                     {/* Description */}
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -134,11 +173,10 @@ const AddService = () => {
                             name="description"
                             rows="4"
                             required
-                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-600"
+                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-600 "
                             placeholder="Enter description"
                         />
                     </div>
-
 
                     {/* Image URL */}
                     <div>
@@ -154,7 +192,6 @@ const AddService = () => {
                         />
                     </div>
 
-
                     {/* Date */}
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -169,7 +206,6 @@ const AddService = () => {
                         />
                     </div>
 
-
                     {/* Email (Readonly) */}
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -178,20 +214,19 @@ const AddService = () => {
                         <input
                             type="email"
                             name='email'
-                            value={user?.email || ''}
+                            value={user.email}
                             readOnly
                             className="w-full px-4 py-2 border border-gray-300 rounded-md bg-gray-100 cursor-not-allowed text-gray-700"
                         />
                     </div>
 
-
                     {/* Submit Button */}
                     <div>
                         <button
                             type="submit"
-                            className="w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-medium"
+                            className="w-full inline-block text-center bg-teal-600 hover:bg-teal-700 text-white py-2 rounded-lg transition transform hover:shadow-2xl hover:scale-102 mt-4"
                         >
-                            Submit
+                            Add Listing
                         </button>
                     </div>
                 </form>
@@ -200,4 +235,4 @@ const AddService = () => {
     );
 };
 
-export default AddService;
+export default AddListings;

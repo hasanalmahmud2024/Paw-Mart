@@ -1,4 +1,4 @@
-import React, { use, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { FaShieldDog } from 'react-icons/fa6';
 import { Link, NavLink } from 'react-router';
 import { AuthContext } from '../../context/AuthContext/AuthContext';
@@ -9,7 +9,7 @@ const Navbar = () => {
         const savedTheme = localStorage.getItem('theme');
         return savedTheme ? savedTheme === 'light' : true;
     });
-    const { user, signOutUser } = use(AuthContext);
+    const { user, signOutUser } = useContext(AuthContext);
 
     useEffect(() => {
         document.documentElement.setAttribute(
@@ -38,12 +38,12 @@ const Navbar = () => {
 
     const links = <>
         <li><NavLink to={'/'}>Home</NavLink></li>
-        <li><NavLink to={'/services'}>Services</NavLink></li>
+        <li><NavLink to={'/pets-supplies'}>Pets & Supplies</NavLink></li>
+        <li><NavLink to={'/profile'}>My Profile</NavLink></li>
         {user && (
             <>
-                <li><NavLink to={'/profile'}>My Profile</NavLink></li>
-                <li><NavLink to={'/add-services'}>Add Services</NavLink></li>
-                <li><NavLink to={'/my-services'}>My Services</NavLink></li>
+                <li><NavLink to={'/add-listings'}>Add Listing</NavLink></li>
+                <li><NavLink to={'/my-listings'}>My Listings</NavLink></li>
                 <li><NavLink to={'/my-orders'}>My Orders</NavLink></li>
             </>
         )}
@@ -53,7 +53,7 @@ const Navbar = () => {
         <div className="navbar bg-base-100 shadow-sm">
             <div className="navbar-start">
                 <div className="dropdown z-50">
-                    <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+                    <div tabIndex={0} role="button" className="btn btn-ghost btn-xs lg:hidden">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /> </svg>
                     </div>
                     <ul
@@ -62,7 +62,7 @@ const Navbar = () => {
                         {links}
                     </ul>
                 </div>
-                <Link to={'/'} className="btn btn-ghost text-xl font-mono"><img src="/golden-retriever.png" className="w-10" alt="warm paws icon" /> PAWMART </Link>
+                <Link to={'/'} className="btn btn-xs md:btn-lg btn-ghost md:text-xl text-lg font-mono"><img src="/golden-retriever.png" className="md:w-10 w-8" alt="warm paws icon" /> PawMart </Link>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
@@ -105,14 +105,15 @@ const Navbar = () => {
                                 {user?.displayName || "User"}
                             </span>
                         </Link>
-                        <button onClick={handleSignOut} className="btn">
+
+                        <button onClick={handleSignOut} className="btn hidden md:block">
                             Logout
                         </button>
                     </div>)
                     : <Link className='btn' to={'/login'}>Log In</Link>
                 }
             </div>
-            <Toaster></Toaster>
+
         </div>
     );
 };

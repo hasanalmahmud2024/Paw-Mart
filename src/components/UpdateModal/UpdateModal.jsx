@@ -1,12 +1,12 @@
-import React, { use, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../context/AuthContext/AuthContext';
 import axios from 'axios';
 
-const UpdateModal = ({ isOpen, onClose, service, onUpdate }) => {
-    const [category, setCategory] = useState(service?.category);
-    const { user } = use(AuthContext);
+const UpdateModal = ({ isOpen, onClose, listing, onUpdate }) => {
+    const [category, setCategory] = useState(listing?.category);
+    const { user } = useContext(AuthContext);
 
-    console.log(service);
+    console.log(listing);
 
     const handleUpdate = e => {
         e.preventDefault();
@@ -30,15 +30,15 @@ const UpdateModal = ({ isOpen, onClose, service, onUpdate }) => {
             imageUrl,
             date,
             email,
-            createdAt: service?.createdAt,
+            createdAt: listing?.createdAt,
         }
         console.log(formData);
 
-        axios.put(`http://localhost:3000/update/${service?._id}`, formData)
+        axios.put(`https://pawmart-backend-eight.vercel.app/update/${listing?._id}`, formData)
             .then(res => {
                 console.log(res.data);
-                
-                const updatedService = { ...service, ...formData };
+
+                const updatedService = { ...listing, ...formData };
                 onUpdate(updatedService);
                 onClose();
             })
@@ -62,7 +62,7 @@ const UpdateModal = ({ isOpen, onClose, service, onUpdate }) => {
                             </label>
                             <br />
                             <input
-                                defaultValue={service?.name}
+                                defaultValue={listing?.name}
                                 name="productName"
                                 type="text"
                                 className="input w-full "
@@ -82,7 +82,7 @@ const UpdateModal = ({ isOpen, onClose, service, onUpdate }) => {
                                 className="input w-full "
                                 onChange={e => setCategory(e.target.value)}
                             >
-                                <option value="Pets">Pets</option>
+                                <option value="Pet">Pet</option>
                                 <option value="Food">Food</option>
                                 <option value="Accessories">Accessories</option>
                                 <option value="Care Products">Care Products</option>
@@ -96,12 +96,13 @@ const UpdateModal = ({ isOpen, onClose, service, onUpdate }) => {
                             </label>
                             <br />
                             <input
-                                defaultValue={service?.price}
+                                defaultValue={listing?.price}
                                 type="number"
                                 name="price"
                                 min="0"
-                                step="0.01"
+                                step="1"
                                 className="input w-full"
+                                disabled={category === "Pet"}
                             />
                         </div>
 
@@ -112,7 +113,7 @@ const UpdateModal = ({ isOpen, onClose, service, onUpdate }) => {
                             </label>
                             <br />
                             <input
-                                defaultValue={service?.location}
+                                defaultValue={listing?.location}
                                 name='location'
                                 type="text"
                                 className="input w-full" />
@@ -125,7 +126,7 @@ const UpdateModal = ({ isOpen, onClose, service, onUpdate }) => {
                             </label>
                             <br />
                             <input
-                                defaultValue={service?.imageUrl}
+                                defaultValue={listing?.imageUrl}
                                 name='imageUrl'
                                 type="text"
                                 className="input w-full" />
@@ -138,7 +139,7 @@ const UpdateModal = ({ isOpen, onClose, service, onUpdate }) => {
                             </label>
                             <br />
                             <textarea
-                                defaultValue={service?.description}
+                                defaultValue={listing?.description}
                                 name='description'
                                 className="textarea w-full"
                                 rows="3">
@@ -151,7 +152,7 @@ const UpdateModal = ({ isOpen, onClose, service, onUpdate }) => {
                                 Date
                             </label> <br />
                             <input
-                                defaultValue={service?.date}
+                                defaultValue={listing?.date}
                                 type="date"
                                 name="date"
                                 required
@@ -175,8 +176,8 @@ const UpdateModal = ({ isOpen, onClose, service, onUpdate }) => {
                             />
                         </div>
                         <div className="modal-action">
-                            <button type="submit" className="btn btn-primary">Submit</button>
-                            <button type="button" className="btn" onClick={onClose}>Cancel</button>
+                            <button type="submit" className="btn text-center bg-teal-600 hover:bg-teal-700 text-white py-2 rounded-lg transition transform hover:shadow-xl hover:scale-105">Submit</button>
+                            <button type="button" className="btn text-center py-2 rounded-lg transition transform hover:shadow-2xl hover:scale-105" onClick={onClose}>Cancel</button>
                         </div>
                     </form>
                 </div>

@@ -1,17 +1,18 @@
 import { createBrowserRouter } from "react-router";
 import RootLayout from "../Layout/RootLayout";
 import Home from "../pages/Home/Home";
-import Services from "../pages/Services/Services";
 import Profile from "../pages/Profile/Profile";
-import ServiceDetails from "../pages/ServiceDetails/ServiceDetails";
 import Error from "../components/Error/Error";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import PrivateRoute from "./PrivateRoute";
 import ResetPassword from "../pages/ResetPassword/ResetPassword";
-import AddService from "../pages/AddService/AddService";
-import MyServices from "../pages/MyServices/MyServices";
+import MyListings from "../pages/MyListings/MyListings";
 import Orders from "../pages/Orders/Orders";
+import CategoryFilteredProducts from "../pages/CategoryFilteredProducts/CategoryFilteredProducts";
+import AddListings from "../pages/AddListings/AddListings";
+import PetsNSupplies from "../pages/PetsNSupplies/PetsNSupplies";
+import ListingDetails from "../pages/ListingDetails/ListingDetails";
 
 
 const router = createBrowserRouter([
@@ -24,13 +25,17 @@ const router = createBrowserRouter([
                 Component: Home,
             },
             {
-                path: '/services',
-                Component: Services,
+                path: '/pets-supplies',
+                Component: PetsNSupplies,
             },
             {
-                path: '/service-details/:id',
+                path: '/category-filtered-product/:categoryName',
+                element: <CategoryFilteredProducts></CategoryFilteredProducts>
+            },
+            {
+                path: '/listing/:id',
                 element: <PrivateRoute>
-                    <ServiceDetails></ServiceDetails>
+                    <ListingDetails></ListingDetails>
                 </PrivateRoute>,
             },
             {
@@ -42,7 +47,7 @@ const router = createBrowserRouter([
             {
                 path: '/login',
                 Component: Login,
-            }, 
+            },
             {
                 path: '/register',
                 Component: Register,
@@ -52,15 +57,15 @@ const router = createBrowserRouter([
                 Component: ResetPassword,
             },
             {
-                path: '/add-services',
+                path: '/add-listings',
                 element: <PrivateRoute>
-                    <AddService></AddService>
+                    <AddListings></AddListings>
                 </PrivateRoute>,
             },
             {
-                path: '/my-services',
+                path: '/my-listings',
                 element: <PrivateRoute>
-                    <MyServices></MyServices>
+                    <MyListings></MyListings>
                 </PrivateRoute>,
             },
             {

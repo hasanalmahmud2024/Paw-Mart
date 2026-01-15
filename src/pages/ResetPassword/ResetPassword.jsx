@@ -1,10 +1,10 @@
-import React, { use, useRef } from 'react';
+import React, { useContext, useRef } from 'react';
 import { AuthContext } from '../../context/AuthContext/AuthContext';
 import toast, { Toaster } from 'react-hot-toast';
 import { Link } from 'react-router';
 
 const ResetPassword = () => {
-    const { sendResetEmail } = use(AuthContext);
+    const { sendResetEmail } = useContext(AuthContext);
     const emailRef = useRef();
 
     const handleReset = () => {
@@ -15,21 +15,21 @@ const ResetPassword = () => {
         }
 
         sendResetEmail(email)
-        .then(()=>{
-            setTimeout(() => {
-                toast.success("Reset link sent! Check your mail.")
-                
-            }, 1500);
-        })
-        .catch((error)=>{
-            console.log(error);
-            toast.error(error.message);
-        })
+            .then(() => {
+                setTimeout(() => {
+                    toast.success("Reset link sent! Check your mail.")
+
+                }, 1500);
+            })
+            .catch((error) => {
+                console.log(error);
+                toast.error(error.message);
+            })
     }
 
     return (
         <div className='min-h-[60vh] grid justify-center items-center py-12 px-8'>
-            <title>PAWMART | Reset Password</title>
+            <title>PawMart | Reset Password</title>
             <div className="max-w-md mx-auto p-10 shadow-lg bg-neutral-300 rounded-lg mb-8">
                 <h2 className="text-3xl font-black mb-10 text-center text-black">Reset Password</h2>
 
@@ -51,7 +51,7 @@ const ResetPassword = () => {
             <div className='text-center '>
                 <Link to={'/login'} className='btn btn-ghost btn-soft text-white w-full'>Back to Login</Link>
             </div>
-            <Toaster></Toaster>
+
         </div>
     );
 };

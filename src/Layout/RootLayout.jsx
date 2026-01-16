@@ -8,6 +8,7 @@ const RootLayout = () => {
     return (
         <div>
             <Navbar></Navbar>
+            <div className="mt-20 bg-base-100"></div>
             <Outlet></Outlet>
             <Footer></Footer>
             <Toaster></Toaster>

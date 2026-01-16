@@ -36,21 +36,22 @@ const Navbar = () => {
             })
     }
 
+    const linkStyle = ({ isActive }) => isActive ? 'border-b-2 shadow-2xl rounded-none' : "";
     const links = <>
-        <li><NavLink to={'/'}>Home</NavLink></li>
-        <li><NavLink to={'/pets-supplies'}>Pets & Supplies</NavLink></li>
-        <li><NavLink to={'/profile'}>My Profile</NavLink></li>
+        <li><NavLink className={linkStyle} to={'/'}>Home</NavLink></li>
+        <li><NavLink className={linkStyle} to={'/pets-supplies'}>Pets & Supplies</NavLink></li>
+        <li><NavLink className={linkStyle} to={'/profile'}>My Profile</NavLink></li>
         {user && (
             <>
-                <li><NavLink to={'/add-listings'}>Add Listing</NavLink></li>
-                <li><NavLink to={'/my-listings'}>My Listings</NavLink></li>
-                <li><NavLink to={'/my-orders'}>My Orders</NavLink></li>
+                <li><NavLink className={linkStyle} to={'/add-listings'}>Add Listing</NavLink></li>
+                <li><NavLink className={linkStyle} to={'/my-listings'}>My Listings</NavLink></li>
+                <li><NavLink className={linkStyle} to={'/my-orders'}>My Orders</NavLink></li>
             </>
         )}
     </>
 
     return (
-        <div className="navbar bg-base-100 shadow-sm">
+        <div className="navbar bg-base-100 fixed top-0 left-0 right-0 z-50 shadow">
             <div className="navbar-start">
                 <div className="dropdown z-50">
                     <div tabIndex={0} role="button" className="btn btn-ghost btn-xs lg:hidden">

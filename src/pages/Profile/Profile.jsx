@@ -44,7 +44,7 @@ const Profile = () => {
     }
 
     return (
-        <div className="hero bg-base-200 md:min-h-[85vh] min-h-screen">
+        <div className="hero bg-base-100 md:min-h-[85vh] min-h-screen">
             <title>PawMart | My Profile</title>
             <div className="hero-content flex-col text-center ">
                 <div className="avatar">

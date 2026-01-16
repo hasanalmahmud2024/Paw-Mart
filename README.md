@@ -1,4 +1,4 @@
-# 🐾 PawMart – Pet Adoption & Supply Portal
+# PawMart – Pet Adoption & Supply Portal
 
 PawMart is a community-driven web platform where pet owners, breeders, and pet shops can list pets for adoption or sell pet-related products such as food, accessories, and care items. Users can browse listings, place adoption or purchase orders, and manage their own listings and orders easily.
 

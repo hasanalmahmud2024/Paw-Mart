@@ -53,7 +53,7 @@ const ListingDetails = () => {
             date: new Date()
         }
 
-        axios.post('https://pawmart-backend-eight.vercel.app/orders', formData)
+        axios.post('https://pawmart-backend-eight.vercel.app/order', formData)
             .then(res => {
                 // console.log(res.data);
 

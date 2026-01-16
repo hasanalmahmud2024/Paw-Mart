@@ -1,11 +1,13 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { AuthContext } from '../../context/AuthContext/AuthContext';
 
 const Orders = () => {
     const [myOrders, setMyOrders] = useState([]);
+    const { user } = useContext(AuthContext);
 
     useEffect(() => {
-        axios.get(`https://pawmart-backend-eight.vercel.app/orders`)
+        axios.get(`https://pawmart-backend-eight.vercel.app/orders?email=${user?.email}`)
             .then(response => {
                 setMyOrders(response.data);
                 // setLoading(false);

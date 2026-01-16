@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router";
 import axios from "axios";
 import { AuthContext } from "../../context/AuthContext/AuthContext";
 import ListingCard from "../../components/ListingCard/ListingCard";
+import Swal from "sweetalert2";
 
 const CategoryFilteredProducts = () => {
     const { categoryName } = useParams();
@@ -15,8 +16,19 @@ const CategoryFilteredProducts = () => {
                 setListings(res.data);
                 setLoading(false);
             })
-            .catch((error) => {
-                console.log(error);
+            .catch((err) => {
+                // console.log(err);
+                let errorMessage = "Something went wrong!";
+                if (err.response) {
+                    errorMessage = err.response.data.message || errorMessage;
+                } else if (err.request) {
+                    errorMessage = "No response from the server. Please try again.";
+                }
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: errorMessage,
+                });
             });
     }, [categoryName, setLoading]);
 

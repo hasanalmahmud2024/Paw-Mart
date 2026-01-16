@@ -28,10 +28,10 @@ const Navbar = () => {
         signOutUser()
             .then(() => {
                 toast.success("Signed Out")
-                console.log('Signed out');
+                // console.log('Signed out');
             })
             .catch(error => {
-                console.log(error);
+                // console.log(error);
                 toast.error(error.message);
             })
     }

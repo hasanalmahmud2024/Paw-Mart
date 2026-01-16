@@ -15,7 +15,7 @@ const Orders = () => {
             });
     }, [])
 
-    console.log(myOrders);
+    // console.log(myOrders);
 
 
     return (

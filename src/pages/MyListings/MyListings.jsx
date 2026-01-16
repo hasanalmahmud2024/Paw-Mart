@@ -36,7 +36,7 @@ const MyListings = () => {
             if (result.isConfirmed) {
                 axios.delete(`https://pawmart-backend-eight.vercel.app/delete/${id}`)
                     .then(res => {
-                        console.log(res.data);
+                        // console.log(res.data);
                         if (res.data.deletedCount) {
                             const filterData = myListings.filter(listing => listing?._id != id);
                             setMyListings(filterData);
@@ -47,7 +47,20 @@ const MyListings = () => {
                             });
                         }
                     })
-                    .catch(err => console.log(err))
+                    .catch(err => {
+                        // console.log(err)
+                        let errorMessage = "Something went wrong!";
+                        if (err.response) {
+                            errorMessage = err.response.data.message || errorMessage;
+                        } else if (err.request) {
+                            errorMessage = "No response from the server. Please try again.";
+                        }
+                        Swal.fire({
+                            icon: "error",
+                            title: "Oops...",
+                            text: errorMessage,
+                        });
+                    })
 
             }
         });

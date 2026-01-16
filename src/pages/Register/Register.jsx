@@ -20,7 +20,7 @@ const Register = () => {
         const photoURL = event.target.photoURL.value;
         const password = event.target.password.value;
 
-        const passwordPattern = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{6,}৳/;
+        const passwordPattern = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{6,}$/;
         if (!passwordPattern.test(password)) {
             toast.error("Password must contain at least one uppercase letter, one lowercase letter, one number, and be at least 6 characters long.");
             return;
@@ -37,7 +37,7 @@ const Register = () => {
                 }).then(() => {
                     setUser(result.user)
                 }).catch(error => {
-                    console.log(error)
+                    // console.log(error)
                     toast.error(error.message)
                 });
 
@@ -48,7 +48,7 @@ const Register = () => {
                 }, 1000);
             })
             .catch((error => {
-                console.log(error)
+                // console.log(error)
                 toast.error(error.message)
             }))
     }
@@ -62,7 +62,7 @@ const Register = () => {
                 }, 1000);
             })
             .catch((error => {
-                console.log(error)
+                // console.log(error)
                 toast.error(error.message);
             }))
     }

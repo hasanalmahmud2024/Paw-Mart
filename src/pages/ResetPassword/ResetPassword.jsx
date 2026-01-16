@@ -1,6 +1,6 @@
 import React, { useContext, useRef } from 'react';
 import { AuthContext } from '../../context/AuthContext/AuthContext';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import { Link } from 'react-router';
 
 const ResetPassword = () => {
@@ -22,7 +22,7 @@ const ResetPassword = () => {
                 }, 1500);
             })
             .catch((error) => {
-                console.log(error);
+                // console.log(error);
                 toast.error(error.message);
             })
     }

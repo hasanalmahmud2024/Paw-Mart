@@ -1,12 +1,14 @@
 import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../context/AuthContext/AuthContext';
 import axios from 'axios';
+import toast from 'react-hot-toast';
+import Swal from 'sweetalert2';
 
 const UpdateModal = ({ isOpen, onClose, listing, onUpdate }) => {
     const [category, setCategory] = useState(listing?.category);
     const { user } = useContext(AuthContext);
 
-    console.log(listing);
+    // console.log(listing);
 
     const handleUpdate = e => {
         e.preventDefault();
@@ -32,17 +34,39 @@ const UpdateModal = ({ isOpen, onClose, listing, onUpdate }) => {
             email,
             createdAt: listing?.createdAt,
         }
-        console.log(formData);
+        // console.log(formData);
 
         axios.put(`https://pawmart-backend-eight.vercel.app/update/${listing?._id}`, formData)
             .then(res => {
-                console.log(res.data);
+                // console.log(res.data);
 
                 const updatedService = { ...listing, ...formData };
                 onUpdate(updatedService);
                 onClose();
+
+                if (res.data.acknowledged) {
+                    Swal.fire({
+                        title: "Updated Successfully!",
+                        icon: "success",
+                        draggable: true
+                    });
+                    form.reset();
+                }
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                // console.log(err);
+                let errorMessage = "Something went wrong!";
+                if (err.response) {
+                    errorMessage = err.response.data.message || errorMessage;
+                } else if (err.request) {
+                    errorMessage = "No response from the server. Please try again.";
+                }
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: errorMessage,
+                });
+            })
     }
 
 

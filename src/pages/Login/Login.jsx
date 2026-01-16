@@ -25,7 +25,7 @@ const Login = () => {
                 }, 1000);
             })
             .catch((error => {
-                console.log(error);
+                // console.log(error);
                 toast.error(error.message);
             }))
     }
@@ -39,7 +39,7 @@ const Login = () => {
                 }, 1000);
             })
             .catch((error => {
-                console.log(error);
+                // console.log(error);
                 toast.error(error.message);
             }))
     }

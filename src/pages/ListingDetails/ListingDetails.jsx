@@ -55,7 +55,7 @@ const ListingDetails = () => {
 
         axios.post('https://pawmart-backend-eight.vercel.app/orders', formData)
             .then(res => {
-                console.log(res.data);
+                // console.log(res.data);
 
                 if (res.data.acknowledged) {
                     Swal.fire({
@@ -68,8 +68,7 @@ const ListingDetails = () => {
                 }
             })
             .catch(err => {
-                console.log(err);
-
+                // console.log(err);
                 let errorMessage = "Something went wrong!";
                 if (err.response) {
                     errorMessage = err.response.data.message || errorMessage;

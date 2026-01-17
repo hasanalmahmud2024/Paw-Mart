@@ -82,56 +82,59 @@ const MyListings = () => {
             <title>PawMart | My Listings</title>
             <h2 className="text-4xl font-bold my-6 ml-6">My Listings</h2>
 
-            <div className="overflow-x-auto">
-                <table className="table pl-2 text-center">
-                    {/* head */}
-                    <thead className=''>
-                        <tr>
-                            <th>Product</th>
-                            <th>Description</th>
-                            <th>Pick Up Date</th>
-                            <th>Location</th>
-                            <th>Price</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {/* row 1 */}
-                        {
-                            myListings?.map(listing => (
-                                <tr key={listing?._id} className='text-sm'>
-                                    <td>
-                                        <div className="flex items-center gap-3">
-                                            <div className="avatar">
-                                                <div className="mask mask-squircle h-12 w-12">
-                                                    <img
-                                                        src={listing?.imageUrl}
-                                                        alt={`image of ${listing?.name}`} />
+            {
+                myListings.length ? (<div className="overflow-x-auto">
+                    <table className="table pl-2 text-center">
+                        {/* head */}
+                        <thead className=''>
+                            <tr>
+                                <th>Product</th>
+                                <th>Description</th>
+                                <th>Pick Up Date</th>
+                                <th>Location</th>
+                                <th>Price</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {/* row 1 */}
+                            {
+                                myListings?.map(listing => (
+                                    <tr key={listing?._id} className='text-sm'>
+                                        <td>
+                                            <div className="flex items-center gap-3">
+                                                <div className="avatar">
+                                                    <div className="mask mask-squircle h-12 w-12">
+                                                        <img
+                                                            src={listing?.imageUrl}
+                                                            alt={`image of ${listing?.name}`} />
+                                                    </div>
+                                                </div>
+                                                <div className='text-left'>
+                                                    <div className="font-bold text-lg">{listing?.name}</div>
+                                                    <div className="text-sm opacity-50">{listing?.category}</div>
                                                 </div>
                                             </div>
-                                            <div className='text-left'>
-                                                <div className="font-bold text-lg">{listing?.name}</div>
-                                                <div className="text-sm opacity-50">{listing?.category}</div>
+                                        </td>
+                                        <td className='text-xs md:text-sm'>{listing?.description}</td>
+                                        <td>{listing?.date}</td>
+                                        <td>{listing?.location}</td>
+                                        <td>{listing?.price}</td>
+                                        <th>
+                                            <div className="flex flex-col md:flex-row gap-2 justify-center">
+                                                {/* modal button and modal */}
+                                                <button className="btn inline-block text-center bg-teal-500 hover:bg-teal-600 text-white py-2 rounded-lg transition transform hover:shadow-2xl hover:scale-105" onClick={() => setSelectedListing(listing)}>Edit</button>
+                                                <button onClick={() => handleDelete(listing?._id)} className="btn bg-orange-600 hover:bg-orange-700 text-white py-2 rounded-lg transition transform hover:shadow-2xl hover:scale-105">Delete</button>
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td className='text-xs md:text-sm'>{listing?.description}</td>
-                                    <td>{listing?.date}</td>
-                                    <td>{listing?.location}</td>
-                                    <td>{listing?.price}</td>
-                                    <th>
-                                        <div className="flex flex-col md:flex-row gap-2 justify-center">
-                                            {/* modal button and modal */}
-                                            <button className="btn inline-block text-center bg-teal-500 hover:bg-teal-600 text-white py-2 rounded-lg transition transform hover:shadow-2xl hover:scale-105" onClick={() => setSelectedListing(listing)}>Edit</button>
-                                            <button onClick={() => handleDelete(listing?._id)} className="btn bg-orange-600 hover:bg-orange-700 text-white py-2 rounded-lg transition transform hover:shadow-2xl hover:scale-105">Delete</button>
-                                        </div>
-                                    </th>
-                                </tr>
-                            ))
-                        }
-                    </tbody>
-                </table>
-            </div>
+                                        </th>
+                                    </tr>
+                                ))
+                            }
+                        </tbody>
+                    </table>
+                </div>) 
+                : < p className='ml-6 font-bold'>Nothing to Show. Add a listing.</p>
+            }
             {
                 selectedListing && (
                     <UpdateModal

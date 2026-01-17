@@ -8,7 +8,7 @@ import "swiper/css/navigation";
 
 const slides = [
     {
-        title: "Find Your Furry Friend Today 🐶",
+        title: "Find Your Pet Today 🐶",
         description:
             "Discover pets for adoption and connect with trusted local pet owners near you.",
         image:
@@ -39,14 +39,14 @@ const slides = [
 
 const Slider = () => {
     return (
-        <section className="w-full my-5">
+        <section className="w-full mb-5">
             <Swiper
                 modules={[Autoplay, Pagination, Navigation]}
                 autoplay={{ delay: 4000, disableOnInteraction: false }}
                 pagination={{ clickable: true }}
                 navigation={true}
                 loop={true}
-                style={{ height: "75vh" }}
+                className='md:h-[60vh] h-[30vh] rounded-md'
             >
                 {slides.map((slide, index) => (
                     <SwiperSlide key={index}>
@@ -55,11 +55,11 @@ const Slider = () => {
                             style={{ backgroundImage: `url('${slide.image}')` }}
                         >
                             <div className="bg-black/50 w-full h-full flex items-center">
-                                <div className="max-w-7xl mx-auto px-6 text-white">
-                                    <h1 className="text-4xl md:text-5xl font-bold mb-4">
+                                <div className="max-w-7xl mx-auto px-12 text-white">
+                                    <h1 className="text-2xl md:text-4xl font-bold mb-4">
                                         {slide.title}
                                     </h1>
-                                    <p className="max-w-xl text-lg mb-6">{slide.description}</p>
+                                    <p className="max-w-xl text-sm md:text-lg mb-6">{slide.description}</p>
                                     {/* <button
                                         className={`${slide.buttonColor} px-6 py-3 transition rounded-lg font-semibold`}
                                     >

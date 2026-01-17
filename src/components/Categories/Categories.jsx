@@ -28,7 +28,7 @@ const Categories = () => {
 
 
     return (
-        <section className="py-16 ">
+        <section className="py-16 mb-5">
             <div className="max-w-7xl mx-auto px-6 text-center">
                 <h2 className="text-3xl md:text-4xl font-bold mb-10">
                     Explore by Category
@@ -40,7 +40,7 @@ const Categories = () => {
                                 key={cat.name}
                                 className="cursor-pointer h-full p-6 rounded-lg shadow-lg hover:shadow-2xl transition transform hover:scale-105"
                             >
-                                <div className="text-5xl mb-4">{cat.emoji}</div>
+                                <div className="text-4xl mb-4">{cat.emoji}</div>
                                 <h3 className="text-xl font-semibold mb-2">{cat.name}</h3>
                                 <p className="text-gray-500">{cat.description}</p>
                             </div>

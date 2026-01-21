@@ -1,6 +1,9 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../context/AuthContext/AuthContext';
+import { jsPDF } from "jspdf";
+import { autoTable } from 'jspdf-autotable';
+import Swal from 'sweetalert2';
 
 const Orders = () => {
     const [myOrders, setMyOrders] = useState([]);
@@ -17,7 +20,45 @@ const Orders = () => {
             });
     }, [])
 
-    // console.log(myOrders);
+    const handleDownloadPDF = () => {
+        try {
+            const doc = new jsPDF();
+            doc.text("My Orders", 105, 10, { align: "center" });
+
+            const tableData = myOrders.map((order, index) => [
+                index + 1,
+                order?.productName || "",
+                order?.price || "For Adoption",
+                order?.address || "",
+                order?.quantity || "",
+                order?.date
+                    ? new Date(order.date).toLocaleString("en-US", {
+                        year: "numeric",
+                        month: "short",
+                        day: "2-digit",
+                    })
+                    : "",
+                order?.phoneNumber || "",
+                order?.note || "",
+            ]);
+
+            autoTable(doc, {
+                head: [["No.", "Product Name", "Price", "Address", "Quantity", "Date", "Phone", "Note"]],
+                body: tableData,
+                startY: 20,
+            });
+
+            doc.save("my_orders.pdf");
+        } catch (error) {
+            console.error("Failed to generate PDF:", error);
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Failed to generate PDF.",
+            });
+        }
+    };
+
 
 
     return (
@@ -72,7 +113,7 @@ const Orders = () => {
                         </table>
                     </div>
                     <div className="flex justify-center mt-10">
-                        <button className='btn btn-wide inline-block text-center bg-teal-600 hover:bg-teal-700 text-white py-2 rounded-lg transition transform hover:shadow-2xl hover:scale-102'>
+                        <button onClick={handleDownloadPDF} className='btn btn-wide inline-block text-center bg-teal-600 hover:bg-teal-700 text-white py-2 rounded-lg transition transform hover:shadow-2xl hover:scale-102'>
                             Download Report
                         </button>
                     </div>

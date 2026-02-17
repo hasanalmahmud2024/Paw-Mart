@@ -7,8 +7,8 @@ const LoadingComponent = () => {
             aria-busy="true"
             aria-live="polite"
         >
-            <span className="loading loading-spinner loading-lg text-neutral"></span>
-            <p className="text-lg font-medium text-neutral">Loading, please wait...</p>
+            <span className="loading loading-spinner loading-lg "></span>
+            <p className="text-lg font-medium ">Loading, please wait...</p>
         </div>
     );
 };

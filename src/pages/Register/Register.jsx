@@ -1,10 +1,11 @@
 import React, { useContext, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router';
 import { AuthContext } from '../../context/AuthContext/AuthContext';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import { IoMdEye, IoMdEyeOff } from 'react-icons/io';
 import { updateProfile } from 'firebase/auth';
 import { auth } from '../../firebase/firebase.config';
+import { FcGoogle } from "react-icons/fc";
 
 const Register = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -14,7 +15,7 @@ const Register = () => {
     const navigate = useNavigate();
 
     const handleSignUp = (event) => {
-        event.preventDefault()
+        event.preventDefault();
         const name = event.target.name.value;
         const email = event.target.email.value;
         const photoURL = event.target.photoURL.value;
@@ -22,101 +23,144 @@ const Register = () => {
 
         const passwordPattern = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{6,}$/;
         if (!passwordPattern.test(password)) {
-            toast.error("Password must contain at least one uppercase letter, one lowercase letter, one number, and be at least 6 characters long.");
+            toast.error("Password must have uppercase, lowercase, number, and be at least 6 chars.");
             return;
         }
-        if (!name) {
-            toast.error("Please Enter Your Name");
+        if (!name.trim()) {
+            toast.error("Please enter your name");
             return;
         }
 
         createUser(email, password)
-            .then(result => {
+            .then((result) => {
                 updateProfile(auth.currentUser, {
-                    displayName: name, photoURL: photoURL,
+                    displayName: name,
+                    photoURL: photoURL,
                 }).then(() => {
-                    setUser(result.user)
-                }).catch(error => {
-                    // console.log(error)
-                    toast.error(error.message)
+                    setUser(result.user);
+                }).catch((error) => {
+                    toast.error(error.message);
                 });
 
-                toast.success('Account Registration successful');
-
+                toast.success('Account created successfully');
                 setTimeout(() => {
-                    navigate(location?.state || '/');
+                    navigate(location?.state?.from || '/');
                 }, 1000);
             })
-            .catch((error => {
-                // console.log(error)
-                toast.error(error.message)
-            }))
-    }
+            .catch((error) => {
+                toast.error(error.message);
+            });
+    };
+
     const handleGoogleSignUp = () => {
         signInWithGoogle()
             .then(() => {
-                toast.success('Account Registration successful');
-
+                toast.success('Account created successfully');
                 setTimeout(() => {
-                    navigate(location?.state || '/');
+                    navigate(location?.state?.from || '/');
                 }, 1000);
             })
-            .catch((error => {
-                // console.log(error)
+            .catch((error) => {
                 toast.error(error.message);
-            }))
-    }
+            });
+    };
 
-    const handleShowPassword = (event) => {
-        event.preventDefault();
-        setShowPassword(!showPassword);
-    }
+    const togglePasswordVisibility = () => {
+        setShowPassword((prev) => !prev);
+    };
 
     return (
-        <div className="hero bg-base-200 py-10">
-            <title>PawMart | Sign Up</title>
-            <div className="hero-content flex-col ">
-                <div className="text-center lg:text-left mb-2">
-                    <h1 className="text-5xl font-bold">Register Your Account!</h1>
-                </div>
-                <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-                    <div className="card-body">
-                        <form onSubmit={handleSignUp}>
-                            <fieldset className="fieldset">
-                                {/* name */}
-                                <label className="label">Your Name</label>
-                                <input name='name' type="text" className="input" placeholder="Your Name" />
-                                {/* email */}
-                                <label className="label">Email</label>
-                                <input name='email' type="email" className="input" placeholder="Email" />
-                                {/* photoURL */}
-                                <label className="label">Your Photo </label>
-                                <input name='photoURL' type="text" className="input" placeholder="PhotoURL" />
-                                {/* password */}
-                                <label className="label">Password</label>
-                                <div className='relative'>
-                                    <button onClick={handleShowPassword} className="btn btn-xs absolute top-2 right-5 z-50">
-                                        {
-                                            showPassword ? <IoMdEyeOff></IoMdEyeOff> : <IoMdEye></IoMdEye>
-                                        }
-                                    </button>
-                                    <input name='password' type={showPassword ? 'text' : "password"} className="input pr-10" placeholder="Password" />
-                                </div>
-                                <button className="btn btn-neutral mt-4 hover:scale-102 hover:shadow-xl">Register</button>
-                                {/* Google */}
-                                <button onClick={handleGoogleSignUp} className="btn bg-white text-black my-1 hover:shadow-xl hover:scale-102">
-                                    <svg aria-label="Google logo" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><g><path d="m0 0H512V512H0" fill="#fff"></path><path fill="#34a853" d="M153 292c30 82 118 95 171 60h62v48A192 192 0 0190 341"></path><path fill="#4285f4" d="m386 400a140 175 0 0053-179H260v74h102q-7 37-38 57"></path><path fill="#fbbc02" d="m90 341a208 200 0 010-171l63 49q-12 37 0 73"></path><path fill="#ea4335" d="m153 219c22-69 116-109 179-50l55-54c-78-75-230-72-297 55"></path></g></svg>
-                                    SignUp with Google
-                                </button>
-                                <p className='text-sm'>Already have an account? <Link to={'/login'} className='text-blue-400 link link-hover hover:text-blue-300'>Login</Link></p>
-                            </fieldset>
-                        </form>
-                    </div>
-                </div>
-            </div>
+        <div className="flex min-h-screen items-center justify-center px-4 py-12">
+            <div className="w-full max-w-md rounded-xl bg-base-100 p-8 shadow-2xl">
+                <h1 className="text-4xl font-bold text-center mb-2 text-neutral">Create Account</h1>
+                <p className="text-center text-sm text-gray-500 mb-6">Join PawMart today!</p>
 
+                <form onSubmit={handleSignUp} className="space-y-5">
+                    {/* Name */}
+                    <div className="form-control">
+                        <label htmlFor="name" className="label-text text-sm font-medium">Full Name</label>
+                        <input
+                            id="name"
+                            name="name"
+                            type="text"
+                            placeholder="Your Name"
+                            className="input input-bordered w-full"
+                            required
+                        />
+                    </div>
+
+                    {/* Email */}
+                    <div className="form-control">
+                        <label htmlFor="email" className="label-text text-sm font-medium">Email</label>
+                        <input
+                            id="email"
+                            name="email"
+                            type="email"
+                            placeholder="Email"
+                            className="input input-bordered w-full"
+                            required
+                        />
+                    </div>
+
+                    {/* Photo URL */}
+                    <div className="form-control">
+                        <label htmlFor="photoURL" className="label-text text-sm font-medium">Photo URL (optional)</label>
+                        <input
+                            id="photoURL"
+                            name="photoURL"
+                            type="text"
+                            placeholder="https://example.com/photo.jpg"
+                            className="input input-bordered w-full"
+                        />
+                    </div>
+
+                    {/* Password */}
+                    <div className="form-control">
+                        <label htmlFor="password" className="label-text text-sm font-medium">Password</label>
+                        <div className="relative">
+                            <input
+                                id="password"
+                                name="password"
+                                type={showPassword ? 'text' : 'password'}
+                                placeholder="••••••••"
+                                className="input input-bordered w-full pr-16"
+                                required
+                            />
+                            <button
+                                type="button"
+                                onClick={togglePasswordVisibility}
+                                className="btn btn-ghost btn-sm absolute right-2 top-1/2 -translate-y-1/2"
+                                aria-label={showPassword ? 'Hide password' : 'Show password'}
+                            >
+                                {showPassword ? <IoMdEyeOff size={20} /> : <IoMdEye size={20} />}
+                            </button>
+                        </div>
+                    </div>
+
+                    {/* Register Button */}
+                    <button type="submit" className="btn btn-neutral hover:scale-102 hover:shadow-lg w-full mt-4">
+                        Register
+                    </button>
+
+                    {/* Google Sign-Up */}
+                    <button
+                        type="button"
+                        onClick={handleGoogleSignUp}
+                        className="btn btn-outline hover:scale-104 hover:shadow-lg w-full flex items-center justify-center gap-2">
+                        <FcGoogle />
+                        Sign Up with Google
+                    </button>
+
+                    <p className="text-center text-sm mt-4">
+                        Already have an account?{' '}
+                        <Link to="/login" className="text-blue-500 hover:text-blue-600">
+                            Login
+                        </Link>
+                    </p>
+                </form>
+            </div>
         </div>
     );
 };
 
-export default Register;
+export default Register;   

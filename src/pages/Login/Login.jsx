@@ -3,15 +3,16 @@ import { Link, useLocation, useNavigate } from 'react-router';
 import { AuthContext } from '../../context/AuthContext/AuthContext';
 import toast, { Toaster } from 'react-hot-toast';
 import { IoMdEye, IoMdEyeOff } from 'react-icons/io';
+import { FcGoogle } from 'react-icons/fc';
 
 const Login = () => {
-    const [showPassword, setShowPassword] = useState(false)
-    const { signInUser, signInWithGoogle, } = useContext(AuthContext);
+    const [showPassword, setShowPassword] = useState(false);
+    const { signInUser, signInWithGoogle } = useContext(AuthContext);
 
     const location = useLocation();
     const navigate = useNavigate();
 
-    const handleLogIn = event => {
+    const handleLogIn = (event) => {
         event.preventDefault();
         const email = event.target.email.value;
         const password = event.target.password.value;
@@ -21,74 +22,121 @@ const Login = () => {
                 event.target.reset();
                 toast.success('Login successful');
                 setTimeout(() => {
-                    navigate(location?.state || '/');
+                    navigate(location?.state?.from || '/');
                 }, 1000);
             })
-            .catch((error => {
-                // console.log(error);
-                toast.error(error.message);
-            }))
-    }
+            .catch((error) => {
+                toast.error(error.message || 'Login failed');
+            });
+    };
 
     const handleGoogleSignIn = () => {
         signInWithGoogle()
             .then(() => {
                 toast.success('Login successful');
                 setTimeout(() => {
-                    navigate(location?.state || '/');
+                    navigate(location?.state?.from || '/');
                 }, 1000);
             })
-            .catch((error => {
-                // console.log(error);
-                toast.error(error.message);
-            }))
-    }
+            .catch((error) => {
+                toast.error(error.message || 'Google sign-in failed');
+            });
+    };
 
-    const handleShowPassword = (event) => {
-        event.preventDefault();
-        setShowPassword(!showPassword);
-    }
+    const togglePasswordVisibility = () => {
+        setShowPassword((prev) => !prev);
+    };
 
     return (
-        <div className="hero bg-base-200 py-10">
+        <div className="flex min-h-screen items-center justify-center px-4 py-12">
+            <Toaster position="top-center" />
             <title>PawMart | Login</title>
-            <div className="hero-content flex-col ">
-                <div className="text-center lg:text-left mb-2">
-                    <h1 className="text-5xl font-bold">Login now!</h1>
-                </div>
-                <div className="card bg-base-100 w-full mx-14 shrink-0 shadow-2xl">
-                    <div className="card-body">
-                        <form onSubmit={handleLogIn}>
-                            <fieldset className="fieldset">
-                                {/* email */}
-                                <label className="label">Email</label>
-                                <input name='email' type="email" className="input" placeholder="Email" />
-                                {/* password */}
-                                <label className="label">Password</label>
-                                <div className='relative'>
-                                    <button onClick={handleShowPassword} className="btn btn-xs absolute top-2 right-5 z-1">
-                                        {
-                                            showPassword ? <IoMdEyeOff></IoMdEyeOff> : <IoMdEye></IoMdEye>
-                                        }
-                                    </button>
-                                    <input name='password' type={showPassword ? 'text' : "password"} className="input pr-10" placeholder="Password" required />
-                                </div>
-                                <div><Link to={'/reset-password'} className="text-sm link link-hover text-blue-400 hover:text-blue-300">Forgot password?</Link></div>
 
-                                <button className="btn btn-neutral hover:scale-102 hover:shadow-xl mt-4">Login</button>
-                                <button onClick={handleGoogleSignIn} className="btn bg-white text-black my-1 hover:scale-102 hover:shadow-xl">
-                                    <svg aria-label="Google logo" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><g><path d="m0 0H512V512H0" fill="#fff"></path><path fill="#34a853" d="M153 292c30 82 118 95 171 60h62v48A192 192 0 0190 341"></path><path fill="#4285f4" d="m386 400a140 175 0 0053-179H260v74h102q-7 37-38 57"></path><path fill="#fbbc02" d="m90 341a208 200 0 010-171l63 49q-12 37 0 73"></path><path fill="#ea4335" d="m153 219c22-69 116-109 179-50l55-54c-78-75-230-72-297 55"></path></g></svg>
-                                    Login with Google
-                                </button>
-                                <p className='text-sm'>Don't have an account? <Link to={'/register'} className='link link-hover text-blue-500 hover:text-blue-400'>Create Now</Link></p>
-                            </fieldset>
-                        </form>
+            <div className="w-full max-w-md space-y-8 rounded-xl bg-base-100 p-8 shadow-2xl">
+                {/* Header */}
+                <div className="text-center">
+                    <h1 className="text-4xl font-extrabold ">Welcome Back!</h1>
+                    <p className="mt-2 text-sm text-gray-500">Sign in to continue to PawMart</p>
+                </div>
+
+                <form onSubmit={handleLogIn} className="mt-6 space-y-6">
+                    {/* Email Field */}
+                    <div className="form-control">
+                        <label htmlFor="email" className="label-text text-sm font-medium">
+                            Email Address
+                        </label>
+                        <input
+                            id="email"
+                            name="email"
+                            type="email"
+                            required
+                            className="input input-bordered w-full focus:ring-2 focus:ring-primary/30"
+                            placeholder="you@example.com"
+                            aria-required="true"
+                        />
                     </div>
-                </div>
-            </div>
 
+                    {/* Password Field */}
+                    <div className="form-control">
+                        <label htmlFor="password" className="label-text text-sm font-medium">
+                            Password
+                        </label>
+                        <div className="relative">
+                            <input
+                                id="password"
+                                name="password"
+                                type={showPassword ? 'text' : 'password'}
+                                required
+                                className="input input-bordered w-full pr-16 focus:ring-2 focus:ring-primary/30"
+                                placeholder="••••••••"
+                                aria-required="true"
+                            />
+                            <button
+                                type="button"
+                                onClick={togglePasswordVisibility}
+                                className="btn btn-ghost btn-sm absolute right-2 top-1/2 -translate-y-1/2 px-3 text-gray-500 hover:text-gray-700"
+                                aria-label={showPassword ? 'Hide password' : 'Show password'}
+                            >
+                                {showPassword ? <IoMdEyeOff size={20} /> : <IoMdEye size={20} />}
+                            </button>
+                        </div>
+                        <label className="label mt-1">
+                            <Link
+                                to="/reset-password"
+                                className="label-text-alt link link-hover text-sm text-blue-500 hover:text-blue-600"
+                            >
+                                Forgot password?
+                            </Link>
+                        </label>
+                    </div>
+
+                    {/* Login Button */}
+                    <button
+                        type="submit"
+                        className="btn btn-neutral hover:scale-102 hover:shadow-lg w-full rounded-lg py-3 font-semibold transition-all duration-150"
+                    >
+                        Log In
+                    </button>
+
+                    {/* Google Sign-In */}
+                    <button
+                        type="button"
+                        onClick={handleGoogleSignIn}
+                        className="btn btn-outline hover:scale-104 hover:shadow-lg w-full flex items-center justify-center gap-2">
+                        <FcGoogle size={20} /> <span>Log in with Google</span>
+                    </button>
+                </form>
+
+                {/* Sign-Up Link */}
+                <p className="text-center text-sm text-gray-500">
+                    Don't have an account?{' '}
+                    <Link to="/register" className="font-medium text-blue-500 hover:text-blue-600">
+                        Create one
+                    </Link>
+                </p>
+            </div>
         </div>
     );
 };
 
-export default Login;
+export default Login;   

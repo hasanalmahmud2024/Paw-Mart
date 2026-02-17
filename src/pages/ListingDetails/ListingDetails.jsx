@@ -14,6 +14,7 @@ const ListingDetails = () => {
     // const { name, price, imageUrl, date, category, createdAt, description, email, location,  } = listing || {};
 
     useEffect(() => {
+        setLoading(true);
         axios.get(`https://pawmart-backend-eight.vercel.app/listing/${id}`)
             .then(response => {
                 setListing(response.data);
@@ -24,8 +25,6 @@ const ListingDetails = () => {
                 setLoading(false);
             });
     }, [id, setLoading]);
-
-    // console.log(listing)
 
     const handleOrder = (e) => {
         e.preventDefault();

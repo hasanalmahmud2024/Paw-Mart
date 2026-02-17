@@ -34,8 +34,8 @@ const Categories = () => {
                     Explore by Category
                 </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-                    {categories.map((cat) => (
-                        <Link to={`/category-filtered-product/${cat.name}`}>
+                    {categories.map((cat,index) => (
+                        <Link key={index} to={`/category-filtered-product/${cat.name}`}>
                             <div
                                 key={cat.name}
                                 className="cursor-pointer h-full p-6 rounded-lg shadow-lg hover:shadow-2xl transition transform hover:scale-105"

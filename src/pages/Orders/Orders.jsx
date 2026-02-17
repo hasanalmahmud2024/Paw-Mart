@@ -4,21 +4,24 @@ import { AuthContext } from '../../context/AuthContext/AuthContext';
 import { jsPDF } from "jspdf";
 import { autoTable } from 'jspdf-autotable';
 import Swal from 'sweetalert2';
+import LoadingComponent from '../../components/LoadingComponent/LoadingComponent';
 
 const Orders = () => {
     const [myOrders, setMyOrders] = useState([]);
-    const { user } = useContext(AuthContext);
+    const { user, loading, setLoading } = useContext(AuthContext);
 
     useEffect(() => {
+        setLoading(true);
         axios.get(`https://pawmart-backend-eight.vercel.app/orders?email=${user?.email}`)
             .then(response => {
                 setMyOrders(response.data);
-                // setLoading(false);
+                setLoading(false);
             })
             .catch(error => {
                 console.error('Error fetching listings:', error);
+                setLoading(false);
             });
-    }, [])
+    }, [setLoading, user?.email])
 
     const handleDownloadPDF = () => {
         try {
@@ -59,10 +62,12 @@ const Orders = () => {
         }
     };
 
-
+if (loading) {
+    return <LoadingComponent></LoadingComponent>;
+}
 
     return (
-        <div className='min-h-[50vh] py-5 mb-5'>
+        <div className='min-h-screen py-5 mb-5'>
             <title>PawMart | My Orders</title>
             <h2 className="text-3xl font-bold my-8 text-center">My Orders</h2>
 

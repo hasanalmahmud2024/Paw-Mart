@@ -10,6 +10,7 @@ const PetsNSupplies = () => {
     const { loading, setLoading } = useContext(AuthContext);
 
     useEffect(() => {
+        setLoading(true);
         axios.get(`https://pawmart-backend-eight.vercel.app/listings?category=${category}`)
             .then(response => {
                 // console.log(response);
@@ -25,7 +26,6 @@ const PetsNSupplies = () => {
    if(loading){
     return <LoadingComponent></LoadingComponent>
    }
-
 
     return (
         <div className='my-10 max-w-7xl mx-auto min-h-screen px-6'>

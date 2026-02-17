@@ -3,13 +3,16 @@ import { AuthContext } from '../../context/AuthContext/AuthContext';
 import axios from 'axios';
 import UpdateModal from '../../components/UpdateModal/UpdateModal';
 import Swal from 'sweetalert2';
+import LoadingComponent from '../../components/LoadingComponent/LoadingComponent';
+import toast from 'react-hot-toast';
 
 const MyListings = () => {
     const [selectedListing, setSelectedListing] = useState(null);
     const [myListings, setMyListings] = useState([]);
-    const { user, setLoading } = useContext(AuthContext);
+    const { user,loading, setLoading } = useContext(AuthContext);
 
     useEffect(() => {
+        setLoading(true);
         axios.get(`https://pawmart-backend-eight.vercel.app/my-listings?email=${user?.email}`)
             .then(response => {
                 // console.log(response);
@@ -18,6 +21,8 @@ const MyListings = () => {
             })
             .catch(error => {
                 console.error('Error fetching listings:', error);
+                toast.error('Error fetching listing');
+                setLoading(false);
             });
     }, [setLoading, user?.email]);
 
@@ -61,11 +66,8 @@ const MyListings = () => {
                             text: errorMessage,
                         });
                     })
-
             }
         });
-
-
     }
 
     const handleUpdate = updatedService => {
@@ -77,8 +79,17 @@ const MyListings = () => {
         );
     };
 
+    if (loading) {
+        return <LoadingComponent />;
+    }
+
+    if (myListings.length === 0) {
+        return <p className='text-center font-bold text-2xl min-h-[50vh]'>Nothing to Show. Add a listing.</p>;
+    }
+
+
     return (
-        <div className='min-h-[50vh] py-5 mb-5'>
+        <div className='min-h-screen py-5 mb-5'>
             <title>PawMart | My Listings</title>
             <h2 className="text-4xl font-bold my-6 ml-6">My Listings</h2>
 
@@ -132,8 +143,8 @@ const MyListings = () => {
                             }
                         </tbody>
                     </table>
-                </div>) 
-                : < p className='ml-6 font-bold'>Nothing to Show. Add a listing.</p>
+                </div>)
+                    : < p className='ml-6 font-bold'>Nothing to Show. Add a listing.</p>
             }
             {
                 selectedListing && (

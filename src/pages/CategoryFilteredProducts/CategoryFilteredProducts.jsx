@@ -4,6 +4,7 @@ import axios from "axios";
 import { AuthContext } from "../../context/AuthContext/AuthContext";
 import ListingCard from "../../components/ListingCard/ListingCard";
 import Swal from "sweetalert2";
+import LoadingComponent from "../../components/LoadingComponent/LoadingComponent";
 
 const CategoryFilteredProducts = () => {
     const { categoryName } = useParams();
@@ -11,6 +12,7 @@ const CategoryFilteredProducts = () => {
     const { setLoading, loading } = useContext(AuthContext);
 
     useEffect(() => {
+        setLoading(true);
         axios.get(`https://pawmart-backend-eight.vercel.app/listings?category=${categoryName}`)
             .then((res) => {
                 setListings(res.data);
@@ -33,7 +35,7 @@ const CategoryFilteredProducts = () => {
     }, [categoryName, setLoading]);
 
     if (loading) {
-        return <div className="text-center py-16">Loading products...</div>;
+        return <LoadingComponent></LoadingComponent>;
     }
 
     return (

@@ -13,12 +13,14 @@ import CategoryFilteredProducts from "../pages/CategoryFilteredProducts/Category
 import AddListings from "../pages/AddListings/AddListings";
 import PetsNSupplies from "../pages/PetsNSupplies/PetsNSupplies";
 import ListingDetails from "../pages/ListingDetails/ListingDetails";
+import LoadingComponent from "../components/LoadingComponent/LoadingComponent";
 
 
 const router = createBrowserRouter([
     {
         path: '/',
         Component: RootLayout,
+        HydrateFallback: LoadingComponent,
         children: [
             {
                 index: true,
@@ -30,7 +32,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/category-filtered-product/:categoryName',
-                element: <CategoryFilteredProducts></CategoryFilteredProducts>
+                Component: CategoryFilteredProducts,
             },
             {
                 path: '/listing/:id',
@@ -82,4 +84,4 @@ const router = createBrowserRouter([
     }
 ])
 
-export default router
+export default router;

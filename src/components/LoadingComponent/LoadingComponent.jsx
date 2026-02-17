@@ -2,9 +2,13 @@ import React from 'react';
 
 const LoadingComponent = () => {
     return (
-        <div className='flex flex-col justify-center items-center gap-5 min-h-[75vh]'>
-            <span className="loading loading-spinner text-primary"></span>
-            <span className='font-bold'>Please wait!</span>
+        <div
+            className="flex flex-col justify-center items-center gap-4 min-h-screen bg-base-100"
+            aria-busy="true"
+            aria-live="polite"
+        >
+            <span className="loading loading-spinner loading-lg text-neutral"></span>
+            <p className="text-lg font-medium text-neutral">Loading, please wait...</p>
         </div>
     );
 };
